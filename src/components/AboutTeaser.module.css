@@ -1,0 +1,32 @@
+.section {
+  padding: clamp(3rem, 6vw, 5rem) var(--edge);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.copy p {
+  color: var(--text-dim);
+  margin-top: 1rem;
+}
+
+.frame {
+  aspect-ratio: 4 / 5;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 1rem;
+}

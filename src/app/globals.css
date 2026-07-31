@@ -1,0 +1,226 @@
+:root {
+  /* --- brand source colors (from the FManuel Art logo) --- */
+  --stage: #100f19; /* negro de sala, con dejo azul */
+  --paper: #eeebe3; /* blanco proyección, papel cálido */
+  --brand: #3968a0; /* azul exacto del isotipo */
+  --brand-on-light: #2c4f79; /* azul oscurecido para AA sobre papel */
+  --brand-on-dark: #72a9db; /* azul claro del isotipo, ya AA sobre sala oscura */
+  --tally-on-light: #a8332b;
+  --tally-on-dark: #e8604f;
+  --amber-on-light: #9c6b23;
+  --amber-on-dark: #e3a855;
+  --motion-on-light: #5a8fc2;
+  --motion-on-dark: #a9cdea;
+
+  --bg: var(--paper);
+  --bg-raised: #e2ddd0;
+  --text: #221c1e;
+  --text-dim: #5b5049;
+  --line: rgba(34, 28, 30, 0.16);
+  --accent: var(--brand-on-light);
+  --tally: var(--tally-on-light);
+  --amber: var(--amber-on-light);
+  --motion: var(--motion-on-light);
+
+  --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+  --font-body: Helvetica, "Helvetica Neue", Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, "Roboto Mono", monospace;
+
+  --edge: clamp(1.25rem, 4vw, 4rem);
+  --letterbox: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--stage);
+    --bg-raised: #1d1822;
+    --text: #efe7d8;
+    --text-dim: #b3a89a;
+    --line: rgba(239, 231, 216, 0.14);
+    --accent: var(--brand-on-dark);
+    --tally: var(--tally-on-dark);
+    --amber: var(--amber-on-dark);
+    --motion: var(--motion-on-dark);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: var(--stage);
+  --bg-raised: #1d1822;
+  --text: #efe7d8;
+  --text-dim: #b3a89a;
+  --line: rgba(239, 231, 216, 0.14);
+  --accent: var(--brand-on-dark);
+  --tally: var(--tally-on-dark);
+  --amber: var(--amber-on-dark);
+  --motion: var(--motion-on-dark);
+}
+
+:root[data-theme="light"] {
+  --bg: var(--paper);
+  --bg-raised: #e2ddd0;
+  --text: #221c1e;
+  --text-dim: #5b5049;
+  --line: rgba(34, 28, 30, 0.16);
+  --accent: var(--brand-on-light);
+  --tally: var(--tally-on-light);
+  --amber: var(--amber-on-light);
+  --motion: var(--motion-on-light);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100%;
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-wrap: balance;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+p {
+  max-width: 68ch;
+}
+
+code {
+  font-family: var(--font-mono);
+}
+
+/* --- shared component utilities --- */
+.eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1.1em;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1em;
+}
+
+.eyebrow .num {
+  color: var(--tally);
+  font-weight: 700;
+}
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--text);
+  padding: 0.75em 1.4em;
+  position: relative;
+  overflow: hidden;
+  color: var(--text);
+}
+
+.btnGhost::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--tally);
+  transition: width 0.35s ease;
+}
+
+.btnGhost:hover::after {
+  width: 100%;
+}
+
+.tagPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  padding: 0.35em 0.7em;
+  color: var(--text-dim);
+}
+
+.tagPill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tagPill[data-dept="branding"] .dot {
+  background: var(--accent);
+}
+
+.tagPill[data-dept="ilustracion"] .dot {
+  background: var(--amber);
+}
+
+.tagPill[data-dept="motion"] .dot {
+  background: var(--motion);
+}
+
+.tagPill[data-dept="publicidad"] .dot {
+  background: var(--text-dim);
+}
+
+html.custom-cursor-active,
+html.custom-cursor-active a,
+html.custom-cursor-active button {
+  cursor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,36 @@
+.section {
+  padding: clamp(3rem, 6vw, 5rem) var(--edge);
+  border-bottom: 1px solid var(--line);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 2rem;
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--bg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+}
+
+.card p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}

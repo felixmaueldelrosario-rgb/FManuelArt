@@ -1,0 +1,62 @@
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 48px var(--edge) calc(32px + var(--letterbox));
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+@media (max-width: 720px) {
+  .footer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.role {
+  color: var(--text);
+  display: block;
+  margin-bottom: 0.6em;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer a {
+  display: block;
+  padding: 0.2em 0;
+}
+
+.footer a:hover {
+  color: var(--accent);
+}
+
+.copyBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.2em 0;
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.copyBtn:hover {
+  color: var(--accent);
+}
+
+.tail {
+  grid-column: 1 / -1;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

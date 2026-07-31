@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la ~/Downloads/ 2>/dev/null | grep -i -E \"logo|fmanuel\" )",
+      "Bash(npm -v)",
+      "Bash(npx --yes create-next-app@latest . --typescript --eslint --app --no-tailwind --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(npx --yes create-next-app@latest fmanuel-art-web --typescript --eslint --app --no-tailwind --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(cp \"/c/Users/User/Downloads/logo fmanuel art.svg\" \"/d/Fmanuel art web/public/brand/logo-fmanuel-art.svg\")",
+      "Bash(cp \"/c/Users/User/Downloads/logo fmanuel art.png\" \"/d/Fmanuel art web/public/brand/logo-fmanuel-art.png\")",
+      "Bash(npm install *)",
+      "Bash(cp \"/c/Users/User/Downloads/para la web/zapatilla  speed post.png\" \"/d/Fmanuel art web/public/work/rush9-post.png\")",
+      "Bash(cp \"/c/Users/User/Downloads/para la web/zapatilla speed story.png\" \"/d/Fmanuel art web/public/work/rush9-story.png\")",
+      "Bash(cp \"/c/Users/User/Downloads/para la web/ANACAONA CARD.png\" \"/d/Fmanuel art web/public/work/mundo-taino-anacaona.png\")",
+      "Bash(cp \"/c/Users/User/Downloads/para la web/casiscasgo de hiuguey card.png\" \"/d/Fmanuel art web/public/work/mundo-taino-higuey.png\")",
+      "Bash(cp \"/c/Users/User/Downloads/para la web/Aaron Judge card.png\" \"/d/Fmanuel art web/public/work/mlb-aaron-judge.png\")",
+      "Bash(netstat -ano)",
+      "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Select-Object Id,StartTime,Path\")",
+      "Bash(powershell -Command \"Get-CimInstance Win32_Process -Filter \\\\\"Name='node.exe'\\\\\" | Select-Object ProcessId, CommandLine | Format-List\")",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/@react-three/fiber/package.json'\\).version, require\\('./node_modules/react/package.json'\\).version, require\\('./node_modules/three/package.json'\\).version\\)\")"
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 2rem 0 2.6rem;
+}
+
+.filterBtn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text-dim);
+  padding: 0.5em 1em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.filterBtn .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.filterBtn[data-active="true"] {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+.filterBtn[data-dept="branding"] .dot {
+  background: var(--accent);
+}
+
+.filterBtn[data-dept="ilustracion"] .dot {
+  background: var(--amber);
+}
+
+.filterBtn[data-dept="motion"] .dot {
+  background: var(--motion);
+}
+
+.filterBtn[data-dept="publicidad"] .dot {
+  background: var(--text-dim);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  padding: 3rem 0;
+}

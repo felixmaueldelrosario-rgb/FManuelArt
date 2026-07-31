@@ -1,0 +1,231 @@
+.header {
+  position: sticky;
+  top: var(--letterbox);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 14px var(--edge);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.header.scrolled {
+  border-bottom-color: var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.wordmark {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (max-width: 860px) {
+  .nav {
+    display: none;
+  }
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.6rem;
+  list-style: none;
+}
+
+.navLinks a {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  position: relative;
+  padding-bottom: 3px;
+}
+
+.navLinks a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0;
+  background: var(--tally);
+  transition: width 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: var(--text);
+}
+
+.navLinks a:hover::after {
+  width: 100%;
+}
+
+.reelBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--text);
+  padding: 0.55em 1.1em;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.reelBtn::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tally);
+}
+
+.reelBtn:hover {
+  border-color: var(--tally);
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+@media (max-width: 860px) {
+  .burger {
+    display: flex;
+  }
+}
+
+.burger span {
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+}
+
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--letterbox) + 20px) var(--edge) 40px;
+}
+
+.mobileMenuHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobileClose {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.mobileLinks {
+  list-style: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.mobileLinks a {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 10vw, 3rem);
+  color: var(--text);
+}
+
+.mobileLinks .num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--tally);
+  margin-right: 0.5em;
+}
+
+.mobileReel {
+  align-self: flex-start;
+  margin-top: 1rem;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--stage) 88%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--edge);
+}
+
+.modal {
+  width: min(720px, 100%);
+  aspect-ratio: 16 / 9;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+  color: var(--text);
+}
+
+.modalClose {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+}
+
+.modalSlate {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tally);
+}
+
+.modalTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}

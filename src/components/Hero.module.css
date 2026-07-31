@@ -1,0 +1,79 @@
+.hero {
+  position: relative;
+  padding: clamp(3rem, 8vh, 6rem) var(--edge) clamp(3rem, 10vh, 7rem);
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 700px;
+  max-height: 700px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.scene {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(52vw, 640px);
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.scene canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 860px) {
+  .scene {
+    display: none;
+  }
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+}
+
+.mark {
+  margin-bottom: 1.6rem;
+}
+
+.title {
+  font-size: clamp(2.6rem, 1.4rem + 6vw, 5.4rem);
+  line-height: 0.98;
+}
+
+.title em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.subtitle {
+  margin-top: 1.4rem;
+  font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.3rem);
+  color: var(--text-dim);
+  max-width: 56ch;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.2rem;
+}
