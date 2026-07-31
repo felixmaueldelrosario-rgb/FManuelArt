@@ -12,18 +12,34 @@ export default function AboutTeaser() {
         <h2>El proceso importa tanto como el resultado.</h2>
         <p>
           Cada proyecto empieza en el papel: bocetos, referencias, pruebas de color. Esa parte
-          del trabajo casi nunca se muestra — aquí es parte de la historia.
-        </p>
-        <p>
-          Reemplazá este bloque con tu foto de estudio, tu proceso real o un timeline tipo
-          storyboard con tus bocetos.
+          del trabajo casi nunca se muestra — acá, comprimida en un timelapse, es parte de la
+          historia.
         </p>
         <a className="btnGhost" href="#contacto" style={{ marginTop: "1.4rem", display: "inline-flex" }}>
           Conocer el estudio
         </a>
       </Reveal>
-      <Reveal className={styles.frame} y={16}>
-        Foto de estudio / proceso — reemplazar
+      <Reveal className={styles.reels} y={16}>
+        <figure className={styles.reel}>
+          <video
+            src="/work/speed-painting-1.mp4"
+            poster="/work/speed-painting-1-poster.jpg"
+            controls
+            preload="none"
+            playsInline
+          />
+          <figcaption className={styles.reelCaption}>Speed painting · proceso 01</figcaption>
+        </figure>
+        <figure className={styles.reel}>
+          <video
+            src="/work/speed-painting-2.mp4"
+            poster="/work/speed-painting-2-poster.jpg"
+            controls
+            preload="none"
+            playsInline
+          />
+          <figcaption className={styles.reelCaption}>Speed painting · proceso 02</figcaption>
+        </figure>
       </Reveal>
     </section>
   );

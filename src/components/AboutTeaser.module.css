@@ -17,16 +17,36 @@
   margin-top: 1rem;
 }
 
-.frame {
-  aspect-ratio: 4 / 5;
-  background: var(--bg-raised);
-  border: 1px solid var(--line);
+.reels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .reels {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reel {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reel video {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: var(--bg-raised);
+}
+
+.reelCaption {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text-dim);
-  text-align: center;
-  padding: 1rem;
 }

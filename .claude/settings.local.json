@@ -44,7 +44,17 @@
       "Bash(node -e ' *)",
       "Bash(cp \"/c/Users/User/Downloads/para la web/Hugoo edición Rara.png\" \"/d/Fmanuel art web/public/work/hugoo.png\")",
       "Bash(cp \"/c/Users/User/Downloads/para la web/GRAFUS EDICIÓN COMÚN.png\" \"/d/Fmanuel art web/public/work/grafus.png\")",
-      "Bash(cp \"/c/Users/User/Downloads/para la web/Boceto.png\" \"/d/Fmanuel art web/public/work/legacy-boceto.png\")"
+      "Bash(cp \"/c/Users/User/Downloads/para la web/Boceto.png\" \"/d/Fmanuel art web/public/work/legacy-boceto.png\")",
+      "Bash(ffmpeg -version)",
+      "Bash(npm view *)",
+      "Bash(node -e \"console.log\\(require\\('ffmpeg-static'\\)\\)\")",
+      "Bash('D:\\\\Fmanuel art *)",
+      "Bash(curl -s -o /dev/null -w \"video1: %{http_code} %{size_download}\\\\n\" http://localhost:3000/work/speed-painting-1.mp4)",
+      "Bash(curl -s -o /dev/null -w \"video2: %{http_code} %{size_download}\\\\n\" http://localhost:3000/work/speed-painting-2.mp4)",
+      "Bash(curl -s -o /dev/null -w \"poster1: %{http_code} %{size_download}\\\\n\" http://localhost:3000/work/speed-painting-1-poster.jpg)",
+      "Bash(curl -s -o /dev/null -w \"poster2: %{http_code} %{size_download}\\\\n\" http://localhost:3000/work/speed-painting-2-poster.jpg)",
+      "Bash(rm -rf \"/d/Fmanuel art web/.next\")",
+      "Bash(npm uninstall *)"
     ]
   }
 }
