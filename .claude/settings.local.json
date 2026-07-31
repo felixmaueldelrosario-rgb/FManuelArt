@@ -17,7 +17,30 @@
       "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Select-Object Id,StartTime,Path\")",
       "Bash(powershell -Command \"Get-CimInstance Win32_Process -Filter \\\\\"Name='node.exe'\\\\\" | Select-Object ProcessId, CommandLine | Format-List\")",
       "Bash(curl -s http://localhost:3000/)",
-      "Bash(node -e \"console.log\\(require\\('./node_modules/@react-three/fiber/package.json'\\).version, require\\('./node_modules/react/package.json'\\).version, require\\('./node_modules/three/package.json'\\).version\\)\")"
+      "Bash(node -e \"console.log\\(require\\('./node_modules/@react-three/fiber/package.json'\\).version, require\\('./node_modules/react/package.json'\\).version, require\\('./node_modules/three/package.json'\\).version\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(mkdir -p \"/d/Fmanuel art web/src/app/filmografia/[slug]\")",
+      "Bash(curl -s -o /tmp/og-home.png -w \"home OG: %{http_code}, size=%{size_download}\\\\n\" http://localhost:3000/opengraph-image)",
+      "Bash(curl -s -o /tmp/og-project.png -w \"project OG: %{http_code}, size=%{size_download}\\\\n\" http://localhost:3000/filmografia/rush9/opengraph-image)",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /dev/null -w \"home OG: %{http_code}\\\\n\" http://localhost:3000/opengraph-image)",
+      "Bash(curl -s -o /dev/null -w \"project OG: %{http_code}\\\\n\" http://localhost:3000/filmografia/rush9/opengraph-image)",
+      "Bash(curl -s -o /dev/null -w \"home page: %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /d/tmp_og_home.png -w \"home OG: %{http_code}, size=%{size_download}\\\\n\" http://localhost:3000/opengraph-image)",
+      "Bash(curl -s -o /d/tmp_og_project.png -w \"project OG: %{http_code}, size=%{size_download}\\\\n\" http://localhost:3000/filmografia/rush9/opengraph-image)",
+      "Read(//d//**)",
+      "Bash(curl -s -o /d/tmp_og_project2.png -w \"project OG: %{http_code}, size=%{size_download}\\\\n\" http://localhost:3000/filmografia/rush9/opengraph-image)",
+      "Bash(curl -s -o /d/tmp_og_project3.png -w \"square project OG: %{http_code}, size=%{size_download}\\\\n\" http://localhost:3000/filmografia/rush9/opengraph-image)",
+      "Bash(curl -s -o /d/tmp_og_project4.png -w \"portrait project OG: %{http_code}, size=%{size_download}\\\\n\" http://localhost:3000/filmografia/aaron-judge/opengraph-image)",
+      "Bash(rm -f /d/tmp_og_*.png)",
+      "Bash(curl -s http://localhost:3000/robots.txt)",
+      "Bash(curl -s http://localhost:3000/sitemap.xml)",
+      "Bash(curl -s -o /dev/null -w \"home: %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"robots: %{http_code}\\\\n\" http://localhost:3000/robots.txt)",
+      "Bash(curl -s -o /dev/null -w \"sitemap: %{http_code}\\\\n\" http://localhost:3000/sitemap.xml)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(curl -s -o /dev/null -w \"icon.png via /icon.png?...: %{http_code}\\\\n\" \"http://localhost:3000/icon.png?d3ac5ba9f5eb4c8f\")",
+      "Bash(npm run *)"
     ]
   }
 }
