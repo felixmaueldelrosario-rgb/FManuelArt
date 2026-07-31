@@ -40,7 +40,8 @@
       "Bash(curl -s -o /dev/null -w \"sitemap: %{http_code}\\\\n\" http://localhost:3000/sitemap.xml)",
       "Bash(echo \"exit: $?\")",
       "Bash(curl -s -o /dev/null -w \"icon.png via /icon.png?...: %{http_code}\\\\n\" \"http://localhost:3000/icon.png?d3ac5ba9f5eb4c8f\")",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(node -e ' *)"
     ]
   }
 }

@@ -97,7 +97,7 @@ export default function Hero() {
             Ver filmografía
           </a>
           <a className="btnGhost" href="#contacto">
-            Hablemos de tu marca
+            Empecemos la próxima producción
           </a>
         </div>
       </div>
