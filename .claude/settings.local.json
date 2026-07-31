@@ -55,7 +55,18 @@
       "Bash(curl -s -o /dev/null -w \"poster2: %{http_code} %{size_download}\\\\n\" http://localhost:3000/work/speed-painting-2-poster.jpg)",
       "Bash(rm -rf \"/d/Fmanuel art web/.next\")",
       "Bash(npm uninstall *)",
-      "Bash(grep -n \"estudio\\\\|filmografia\\\\`\" \"/d/Fmanuel art web/src/app/sitemap.ts\")"
+      "Bash(grep -n \"estudio\\\\|filmografia\\\\`\" \"/d/Fmanuel art web/src/app/sitemap.ts\")",
+      "Bash(powershell -Command \"Stop-Process -Id 36160,4320 -Force -ErrorAction SilentlyContinue; Write-Host done\")",
+      "Bash(grep -rniE \"testimonio|cliente real|años de experiencia|tarifa|precio|desde \\\\$|USD|proceso de trabajo|paso 1|brief\" src/ --include=\"*.tsx\" --include=\"*.ts\")",
+      "Bash(cp 'C:\\\\Users\\\\User\\\\Downloads\\\\para la web\\\\Clientes/Peroni formula 1 story.jpg' 'D:\\\\Fmanuel art web\\\\public\\\\work/client-peroni-f1.jpg')",
+      "Bash(cp 'C:\\\\Users\\\\User\\\\Downloads\\\\para la web\\\\Clientes/Revista LyR.jpg' 'D:\\\\Fmanuel art web\\\\public\\\\work/client-lyr-revista.jpg')",
+      "Bash(cp 'C:\\\\Users\\\\User\\\\Downloads\\\\para la web\\\\Clientes/feed locatour 4.jpg' 'D:\\\\Fmanuel art web\\\\public\\\\work/client-locatour-feed.jpg')",
+      "Bash(curl -s -o /dev/null -w \"og peroni: %{http_code}\\\\n\" http://localhost:3000/filmografia/peroni/opengraph-image)",
+      "Bash(curl -s -o /dev/null -w \"og locatour: %{http_code}\\\\n\" http://localhost:3000/filmografia/locatour/opengraph-image)",
+      "Bash(curl -s -o /dev/null -w \"og lyr: %{http_code}\\\\n\" http://localhost:3000/filmografia/lyr/opengraph-image)",
+      "Bash(curl -s -o /dev/null -w \"og fresita: %{http_code}\\\\n\" http://localhost:3000/filmografia/fresita/opengraph-image)",
+      "Bash(curl -s -o /d/tmp_og_peroni.png http://localhost:3000/filmografia/peroni/opengraph-image)",
+      "Bash(curl -s -o /d/tmp_og_peroni2.png http://localhost:3000/filmografia/peroni/opengraph-image)"
     ]
   }
 }

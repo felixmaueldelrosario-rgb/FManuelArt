@@ -30,6 +30,18 @@
   color: var(--text-dim);
 }
 
+.clientBadge {
+  display: inline-block;
+  margin: 0.8em 0 0.2em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.35em 0.7em;
+}
+
 .cover {
   position: relative;
   width: 100%;
@@ -60,6 +72,48 @@
 
 .beat p {
   color: var(--text-dim);
+}
+
+.gallery {
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+}
+
+.galleryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.galleryItem video,
+.galleryImage {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--line);
+  background: var(--bg-raised);
+  object-fit: cover;
+}
+
+.galleryImage {
+  position: relative;
+  overflow: hidden;
+}
+
+.galleryImage img {
+  object-fit: cover;
+}
+
+.galleryLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .processBlock {

@@ -1,4 +1,5 @@
 import CopyEmail from "./CopyEmail";
+import { CONTACT } from "@/data/contact";
 import styles from "./SiteFooter.module.css";
 
 export default function SiteFooter() {
@@ -20,8 +21,9 @@ export default function SiteFooter() {
       <div>
         <span className={styles.role}>Contacto</span>
         <CopyEmail />
-        <a href="#" rel="noopener noreferrer">Instagram</a>
-        <a href="#" rel="noopener noreferrer">Behance</a>
+        <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href={CONTACT.behance} target="_blank" rel="noopener noreferrer">Behance</a>
       </div>
       <div>
         <span className={styles.role}>Estudio</span>

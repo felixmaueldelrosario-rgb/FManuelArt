@@ -33,17 +33,30 @@
   color: var(--accent);
 }
 
-.copyBtn {
-  display: block;
-  width: 100%;
-  text-align: left;
+.emailRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  flex-wrap: wrap;
   padding: 0.2em 0;
+}
+
+.emailRow a {
+  padding: 0;
+  word-break: break-all;
+}
+
+.copyBtn {
   background: none;
   border: none;
   font-family: var(--font-mono);
-  font-size: inherit;
-  color: inherit;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-decoration: underline;
+  text-underline-offset: 2px;
   cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .copyBtn:hover {

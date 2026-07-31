@@ -56,6 +56,9 @@ export default async function CaseStudyPage({
           <span className="dot" />
           {project.deptLabel}
         </span>
+        {project.client && (
+          <span className={styles.clientBadge}>Cliente real — {project.client}</span>
+        )}
         <h1 className={styles.title}>{project.title}</h1>
         <p className={styles.role}>{project.role}</p>
         {project.note && <p className={styles.role}>{project.note}</p>}
@@ -81,6 +84,35 @@ export default async function CaseStudyPage({
           </Reveal>
         ))}
       </div>
+
+      {project.gallery && project.gallery.length > 0 && (
+        <Reveal className={styles.gallery}>
+          <span className="eyebrow" style={{ marginBottom: "0.8em" }}>
+            <span className="num">Más</span>
+            <span>Otras piezas de esta campaña</span>
+          </span>
+          <div className={styles.galleryGrid}>
+            {project.gallery.map((item, i) => (
+              <div className={styles.galleryItem} key={i}>
+                {item.type === "video" ? (
+                  <video
+                    src={item.src}
+                    poster={item.poster}
+                    controls
+                    preload="none"
+                    playsInline
+                  />
+                ) : (
+                  <div className={styles.galleryImage}>
+                    <Image src={item.src} alt={item.label ?? project.title} fill sizes="(max-width: 900px) 100vw, 450px" />
+                  </div>
+                )}
+                {item.label && <span className={styles.galleryLabel}>{item.label}</span>}
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      )}
 
       {project.processImage && (
         <Reveal className={styles.processBlock}>

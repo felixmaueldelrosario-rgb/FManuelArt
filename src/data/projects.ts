@@ -1,5 +1,12 @@
 export type Dept = "branding" | "ilustracion" | "motion" | "publicidad";
 
+export type GalleryItem = {
+  type: "image" | "video";
+  src: string;
+  poster?: string;
+  label?: string;
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -9,6 +16,8 @@ export type Project = {
   note?: string;
   image: string;
   processImage?: string;
+  gallery?: GalleryItem[];
+  client?: string;
   featured: boolean;
   role: string;
   concept: string;
@@ -169,7 +178,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Universo FManuelArt · #006",
     image: "/work/hugoo.png",
-    featured: true,
+    featured: false,
     role: "Diseño de personaje y sistema de cartas coleccionables",
     concept:
       "Hugoo abre una segunda serie dentro del Universo FManuelArt, esta vez de personajes originales en vez de figuras históricas. Vive sin planes, arriba de una BMX, y su superpoder es no tomarse nada demasiado en serio.",
@@ -194,5 +203,87 @@ export const PROJECTS: Project[] = [
       "Grafus ya tiene dos ediciones propias (Común y Rara) con distintas escenas y estadísticas, algo que Hugoo todavía no tiene — el sistema de rareza está pensado para crecer carta por carta, personaje por personaje.",
     result:
       "Con Hugoo y Grafus, el Universo FManuelArt deja de ser una serie única (Mundo Taíno) y pasa a ser una plataforma de personajes propios en expansión.",
+  },
+  {
+    slug: "peroni",
+    title: "Peroni Nastro Azzurro",
+    dept: "publicidad",
+    deptLabel: "Publicidad",
+    year: "2023",
+    note: "Cliente real — campaña de redes sociales",
+    image: "/work/client-peroni-f1.jpg",
+    client: "Peroni Nastro Azzurro",
+    gallery: [
+      { type: "video", src: "/work/client-peroni-mar.mp4", poster: "/work/client-peroni-mar-poster.jpg", label: "Story — mesa frente al mar" },
+      { type: "video", src: "/work/client-peroni-rooftop.mp4", poster: "/work/client-peroni-rooftop-poster.jpg", label: "Story — rooftop urbano" },
+    ],
+    featured: true,
+    role: "Dirección de arte y diseño de campaña para redes sociales",
+    concept:
+      "Tres piezas, un mismo cliente, dos ángulos distintos de la misma marca: la activación de Fórmula 1 juega con la velocidad y la adrenalina del deporte; las dos stories de estilo de vida —una frente al mar, otra en un rooftop— juegan con el disfrute pausado. Sostener ambos registros sin que la marca se sienta inconsistente es, en sí, el ejercicio.",
+    process:
+      "La cinta gráfica azul que atraviesa las tres piezas es el hilo que las une: aparece en el fondo de la activación de F1 y como elemento de movimiento en ambas stories, funcionando como firma visual reconocible de la campaña más allá del logo del producto.",
+    result:
+      "Peroni es cliente real, no un ejercicio propio — la campaña se produjo y publicó como pauta de marca en redes sociales.",
+  },
+  {
+    slug: "locatour",
+    title: "Locatour — California Wines",
+    dept: "publicidad",
+    deptLabel: "Publicidad",
+    year: "2023",
+    note: "Cliente real",
+    image: "/work/client-locatour-feed.jpg",
+    client: "Locatour",
+    gallery: [
+      { type: "video", src: "/work/client-locatour-viaje.mp4", poster: "/work/client-locatour-viaje-poster.jpg", label: "Post animado — La vida es un viaje" },
+    ],
+    featured: false,
+    role: "Diseño de contenido y motion para redes sociales",
+    concept:
+      "Un feed post de fotografía de producto ('el mejor vino se comparte con la mejor persona') y una pieza animada con tipografía cinética ('¿Para dónde te lleva el viaje?') — dos formatos para el mismo cliente, pensados para convivir en el mismo feed sin repetirse.",
+    process:
+      "La pieza animada demuestra un registro distinto al resto del portfolio: tipografía en movimiento, confeti ilustrado y una paleta de marca (violeta y magenta) que no aparece en ningún otro proyecto — motion graphics real, no solo una foto con una capa de movimiento superpuesta.",
+    result:
+      "Locatour es cliente real. Ambas piezas se publicaron como parte de la pauta social continua de la marca.",
+  },
+  {
+    slug: "lyr",
+    title: "L&R — Donde todos califican",
+    dept: "publicidad",
+    deptLabel: "Publicidad",
+    year: "2023",
+    note: "Cliente real — pieza impresa",
+    image: "/work/client-lyr-revista.jpg",
+    client: "L&R",
+    featured: false,
+    role: "Diseño de aviso para revista impresa",
+    concept:
+      "Campaña de Día de las Madres para L&R, una mueblería con más de una década de trayectoria. Es la única pieza de todo el portfolio pensada para papel, no para pantalla — otro set de restricciones: resolución de impresión, sangrado, una sola oportunidad sin scroll para captar la atención.",
+    process:
+      "El aviso se resolvió para convivir con el resto de una revista real, no como una lámina aislada — jerarquía clara entre la fotografía del ambiente, el descuento y el llamado a la acción, pensada para funcionar incluso en una hojeada rápida.",
+    result:
+      "L&R es cliente recurrente — la misma marca aparece también como patrocinador en piezas de eventos que este estudio ha producido para ella.",
+  },
+  {
+    slug: "fresita",
+    title: "Fresita",
+    dept: "motion",
+    deptLabel: "Motion",
+    year: "2023",
+    note: "Cliente real",
+    image: "/work/client-fresita-poster.jpg",
+    client: "Fresita",
+    gallery: [
+      { type: "video", src: "/work/client-fresita.mp4", poster: "/work/client-fresita-poster.jpg", label: "Post animado — Joven, fresca, divertida" },
+    ],
+    featured: false,
+    role: "Motion graphics para redes sociales",
+    concept:
+      "Fresita es un vino espumante con una identidad completamente distinta a Locatour, aunque comparta categoría: joven, rosa, directa. La pieza tenía que sentirse más cerca de una etiqueta de moda que de una etiqueta de vino tradicional.",
+    process:
+      "Animación 2D de fresas ilustradas entrando en escena alrededor del producto, sincronizada con la aparición del texto de marca — un registro de motion más juguetón e ilustrado que el resto del portfolio, sin perder legibilidad de producto.",
+    result:
+      "Fresita es cliente real. La pieza se produjo como parte del lanzamiento de contenido de marca en redes sociales.",
   },
 ];
