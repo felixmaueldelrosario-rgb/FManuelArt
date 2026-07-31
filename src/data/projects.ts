@@ -73,8 +73,8 @@ export const PROJECTS: Project[] = [
   {
     slug: "juan-soto",
     title: "Juan Soto — Edición Estrella",
-    dept: "motion",
-    deptLabel: "Motion",
+    dept: "ilustracion",
+    deptLabel: "Ilustración",
     year: "2026",
     note: "Arte listo para animación · en proceso",
     image: "/work/mlb-juan-soto.png",
