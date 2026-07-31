@@ -17,15 +17,14 @@ export default function CustomCursor() {
     if (!fine || reduced) return;
 
     setEnabled(true);
-    document.documentElement.classList.add("custom-cursor-active");
 
     const ring = ringRef.current;
     const dot = dotRef.current;
     const rec = recRef.current;
     if (!ring || !dot || !rec) return;
 
-    const ringX = gsap.quickTo(ring, "x", { duration: 0.35, ease: "power3.out" });
-    const ringY = gsap.quickTo(ring, "y", { duration: 0.35, ease: "power3.out" });
+    const ringX = gsap.quickTo(ring, "x", { duration: 0.12, ease: "power3.out" });
+    const ringY = gsap.quickTo(ring, "y", { duration: 0.12, ease: "power3.out" });
     const dotX = gsap.quickTo(dot, "x", { duration: 0.08, ease: "power3.out" });
     const dotY = gsap.quickTo(dot, "y", { duration: 0.08, ease: "power3.out" });
     const recX = gsap.quickTo(rec, "x", { duration: 0.2, ease: "power3.out" });
@@ -66,7 +65,6 @@ export default function CustomCursor() {
     return () => {
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseover", onOver);
-      document.documentElement.classList.remove("custom-cursor-active");
     };
   }, []);
 

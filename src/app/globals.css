@@ -256,12 +256,6 @@ textarea:focus-visible {
    keep every max-width media query in the project aligned to it unless
    there's a specific reason not to. */
 
-html.custom-cursor-active,
-html.custom-cursor-active a,
-html.custom-cursor-active button {
-  cursor: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
