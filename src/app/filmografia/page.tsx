@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import FilmografiaGrid from "@/components/FilmografiaGrid";
 
 export const metadata: Metadata = {
-  title: "Filmografía — FManuel Art",
+  title: "Filmografía",
   description: "Proyectos de branding, ilustración, motion graphics y publicidad de FManuel Art.",
 };
 

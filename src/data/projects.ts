@@ -8,6 +8,7 @@ export type Project = {
   year: string;
   note?: string;
   image: string;
+  processImage?: string;
   featured: boolean;
   role: string;
   concept: string;
@@ -82,7 +83,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Fan art — proyecto sin fines comerciales",
     image: "/work/mlb-aaron-judge.png",
-    featured: true,
+    featured: false,
     role: "Ilustración y diseño editorial · fan art",
     concept:
       "\"Edición Juicio Final\" apuesta por una paleta casi monocromática — negro, blanco y rojo — para tratar a Aaron Judge como lo que es en la cancha: una figura imponente, casi de justicia sumaria.",
@@ -133,14 +134,15 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Diseño de personaje original",
     image: "/work/legacy-composition.png",
+    processImage: "/work/legacy-boceto.png",
     featured: false,
     role: "Diseño de personaje original",
     concept:
       "Diseño de un personaje original con estética de superhéroe — un emblema de corazón, capucha con antenas y un martillo a modo de arma — pensado como si tuviera que \"venderse\" en una sola lámina, al estilo de una hoja de personaje de cómic o videojuego.",
     process:
-      "La composición combina un primer plano dramático con una toma de cuerpo completo, la manera clásica de mostrar personalidad y diseño de vestuario al mismo tiempo sin necesitar una segunda imagen.",
+      "Antes de la ilustración final hubo una hoja de modelo completa: vistas de frente, perfil y espalda, con anotaciones de vestuario (capucha, antenas, capa, cartuchera) y el desglose del arma por separado. Ese trabajo de diseño es el que después permite resolver la lámina final en una sola pose sin inconsistencias.",
     result:
-      "Un músculo distinto al resto del portfolio: diseño de personaje desde cero, no ilustración de una figura o marca ya existente.",
+      "Un músculo distinto al resto del portfolio: diseño de personaje desde cero, con su propio proceso de construcción, no ilustración de una figura o marca ya existente.",
   },
   {
     slug: "estudio-figura",
@@ -158,5 +160,39 @@ export const PROJECTS: Project[] = [
       "Se combina el rigor de un estudio de anatomía clásico con un elemento gestual y abstracto — la cinta de pintura azul — que rompe con lo estrictamente representacional sin abandonar el dibujo.",
     result:
       "Es trabajo personal, sin cliente ni brief — el tipo de estudio que sostiene el resto de la ilustración figurativa en este portfolio.",
+  },
+  {
+    slug: "hugoo",
+    title: "Hugoo — Edición Rara",
+    dept: "ilustracion",
+    deptLabel: "Ilustración · IP propia",
+    year: "2026",
+    note: "Universo FManuelArt · #006",
+    image: "/work/hugoo.png",
+    featured: true,
+    role: "Diseño de personaje y sistema de cartas coleccionables",
+    concept:
+      "Hugoo abre una segunda serie dentro del Universo FManuelArt, esta vez de personajes originales en vez de figuras históricas. Vive sin planes, arriba de una BMX, y su superpoder es no tomarse nada demasiado en serio.",
+    process:
+      "La misma plantilla de carta que sostiene a Mundo Taíno se adapta acá a un tono completamente distinto: ilustración tipo grafiti urbano, paleta teal-carbón, y un sistema de rareza (Común / Rara) tomado directo del lenguaje de los trading cards coleccionables.",
+    result:
+      "Prueba de que el sistema de cartas no es una plantilla de un solo uso — funciona igual de bien para un cacique taíno del siglo XV que para un pibe en bicicleta, sin perder identidad.",
+  },
+  {
+    slug: "grafus",
+    title: "Grafus — Edición Común",
+    dept: "ilustracion",
+    deptLabel: "Ilustración · IP propia",
+    year: "2026",
+    note: "Universo FManuelArt · #009 · también existe edición Rara",
+    image: "/work/grafus.png",
+    featured: false,
+    role: "Diseño de personaje y sistema de cartas coleccionables",
+    concept:
+      "Si Hugoo es el caos con onda, Grafus es su contraparte: un diseñador obsesivo que convierte cada idea en boceto antes de que se le escape. Dos personajes, dos temperamentos, un mismo universo.",
+    process:
+      "Grafus ya tiene dos ediciones propias (Común y Rara) con distintas escenas y estadísticas, algo que Hugoo todavía no tiene — el sistema de rareza está pensado para crecer carta por carta, personaje por personaje.",
+    result:
+      "Con Hugoo y Grafus, el Universo FManuelArt deja de ser una serie única (Mundo Taíno) y pasa a ser una plataforma de personajes propios en expansión.",
   },
 ];

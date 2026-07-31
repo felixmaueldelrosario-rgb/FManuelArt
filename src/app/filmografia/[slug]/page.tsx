@@ -18,7 +18,7 @@ export async function generateMetadata({
   const project = PROJECTS.find((p) => p.slug === slug);
   if (!project) return {};
   return {
-    title: `${project.title} — FManuel Art`,
+    title: project.title,
     description: project.concept,
   };
 }
@@ -81,6 +81,23 @@ export default async function CaseStudyPage({
           </Reveal>
         ))}
       </div>
+
+      {project.processImage && (
+        <Reveal className={styles.processBlock}>
+          <span className="eyebrow" style={{ marginBottom: "0.8em" }}>
+            <span className="num">Proceso</span>
+            <span>Antes de la lámina final</span>
+          </span>
+          <div className={styles.processImage}>
+            <Image
+              src={project.processImage}
+              alt={`Boceto de proceso — ${project.title}`}
+              fill
+              sizes="(max-width: 900px) 100vw, 900px"
+            />
+          </div>
+        </Reveal>
+      )}
 
       <div className={styles.next}>
         <span className="eyebrow">Siguiente proyecto</span>
