@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 import styles from "./CustomCursor.module.css";
 
 export default function CustomCursor() {
@@ -12,7 +13,7 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = prefersReducedMotion();
     if (!fine || reduced) return;
 
     setEnabled(true);

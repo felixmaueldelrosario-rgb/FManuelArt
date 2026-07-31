@@ -33,19 +33,19 @@
 }
 
 .filterBtn[data-dept="branding"] .dot {
-  background: var(--accent);
+  background: var(--dept-branding);
 }
 
 .filterBtn[data-dept="ilustracion"] .dot {
-  background: var(--amber);
+  background: var(--dept-ilustracion);
 }
 
 .filterBtn[data-dept="motion"] .dot {
-  background: var(--motion);
+  background: var(--dept-motion);
 }
 
 .filterBtn[data-dept="publicidad"] .dot {
-  background: var(--text-dim);
+  background: var(--dept-publicidad);
 }
 
 .grid {
@@ -54,7 +54,7 @@
   gap: 1.6rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 860px) {
   .grid {
     grid-template-columns: 1fr;
   }

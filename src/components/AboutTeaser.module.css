@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 860px) {
   .section {
     grid-template-columns: 1fr;
   }
@@ -23,6 +23,9 @@
   gap: 1rem;
 }
 
+/* Narrower than the site's 860px mobile threshold on purpose: once .section
+   has already stacked, the reels row has the full column width to itself
+   and only needs to drop to one column at a smaller size. */
 @media (max-width: 640px) {
   .reels {
     grid-template-columns: 1fr;

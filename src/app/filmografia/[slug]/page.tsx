@@ -67,7 +67,7 @@ export default async function CaseStudyPage({
       <Reveal className={styles.cover}>
         <Image
           src={project.image}
-          alt={project.title}
+          alt={project.alt}
           fill
           sizes="(max-width: 900px) 100vw, 1200px"
           priority
@@ -104,7 +104,7 @@ export default async function CaseStudyPage({
                   />
                 ) : (
                   <div className={styles.galleryImage}>
-                    <Image src={item.src} alt={item.label ?? project.title} fill sizes="(max-width: 900px) 100vw, 450px" />
+                    <Image src={item.src} alt={item.label ?? project.alt} fill sizes="(max-width: 900px) 100vw, 450px" />
                   </div>
                 )}
                 {item.label && <span className={styles.galleryLabel}>{item.label}</span>}
@@ -135,7 +135,7 @@ export default async function CaseStudyPage({
         <span className="eyebrow">Siguiente proyecto</span>
         <a href={`/filmografia/${next.slug}`} className={styles.nextLink}>
           <div className={styles.nextMedia}>
-            <Image src={next.image} alt={next.title} fill sizes="33vw" />
+            <Image src={next.image} alt={next.alt} fill sizes="33vw" />
           </div>
           <div>
             <span className="tagPill" data-dept={next.dept}>

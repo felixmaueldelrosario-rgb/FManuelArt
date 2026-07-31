@@ -15,6 +15,7 @@ export type Project = {
   year: string;
   note?: string;
   image: string;
+  alt: string;
   processImage?: string;
   gallery?: GalleryItem[];
   client?: string;
@@ -41,6 +42,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Campaña adaptada a post y story",
     image: "/work/rush9-post.png",
+    alt: "Velocista en plena zancada con zapatillas doradas y motion blur direccional, sobre fondo dorado y carbón con el titular RUSH9 — Dominate the Speed.",
     featured: true,
     role: "Concepto, dirección de arte y diseño de campaña",
     concept:
@@ -58,6 +60,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Serie de personajes, universo original",
     image: "/work/mundo-taino-anacaona.png",
+    alt: "Carta ilustrada de Anacaona, cacica taína, retrato sereno con marco ornamental dorado y panel lateral de atributos e historia.",
     featured: true,
     role: "Ilustración, diseño de personaje y sistema editorial",
     concept:
@@ -75,6 +78,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Arte listo para animación · en proceso",
     image: "/work/mlb-juan-soto.png",
+    alt: "Carta ilustrada de Juan Soto de los Mets celebrando y señalando a la grada, con panel de logros y estadísticas de béisbol.",
     featured: true,
     role: "Ilustración y diseño de carta · arte base para motion",
     concept:
@@ -92,6 +96,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Fan art — proyecto sin fines comerciales",
     image: "/work/mlb-aaron-judge.png",
+    alt: "Carta ilustrada de Aaron Judge de los Yankees en paleta blanco, negro y rojo, con silueta de Nueva York y bloques densos de estadísticas.",
     featured: false,
     role: "Ilustración y diseño editorial · fan art",
     concept:
@@ -109,6 +114,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Serie de personajes, universo original",
     image: "/work/mundo-taino-higuey.png",
+    alt: "Carta ilustrada con los tres caciques de Higüey — Cayacoa, Higuanamá y Cotubanamá — retratados juntos sobre un atardecer caribeño.",
     featured: false,
     role: "Ilustración, composición y sistema editorial",
     concept:
@@ -126,6 +132,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Retrato digital · estudio de personaje",
     image: "/work/esencia.png",
+    alt: "Retrato digital de una mujer con audífonos y lentes bajo luz dura, fondo gestual en azules que no compite con el rostro.",
     featured: false,
     role: "Ilustración de personaje · estudio de retrato",
     concept:
@@ -143,6 +150,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Diseño de personaje original",
     image: "/work/legacy-composition.png",
+    alt: "Ilustración de personaje original con capucha de antenas, capa roja y emblema de corazón, sosteniendo un martillo como arma.",
     processImage: "/work/legacy-boceto.png",
     featured: false,
     role: "Diseño de personaje original",
@@ -161,6 +169,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Estudio personal · pintura digital",
     image: "/work/estudio-figura.png",
+    alt: "Estudio pictórico de una figura arrodillada, envuelta en un trazo de pintura azul tratado como una cinta escultórica.",
     featured: false,
     role: "Ilustración · estudio de figura",
     concept:
@@ -178,6 +187,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Universo FManuelArt · #006",
     image: "/work/hugoo.png",
+    alt: "Carta ilustrada de Hugoo, personaje con capucha de antenas arriba de una bicicleta BMX, estilo grafiti urbano en paleta teal.",
     featured: false,
     role: "Diseño de personaje y sistema de cartas coleccionables",
     concept:
@@ -195,6 +205,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     note: "Universo FManuelArt · #009 · también existe edición Rara",
     image: "/work/grafus.png",
+    alt: "Carta ilustrada de Grafus, un joven dibujando concentrado en su escritorio, rodeado de lápices, pinceles y bocetos.",
     featured: false,
     role: "Diseño de personaje y sistema de cartas coleccionables",
     concept:
@@ -212,6 +223,7 @@ export const PROJECTS: Project[] = [
     year: "2023",
     note: "Cliente real — campaña de redes sociales",
     image: "/work/client-peroni-f1.jpg",
+    alt: "Botella de Peroni Nastro Azzurro con vaso servido, montada sobre el morro de un auto de Fórmula 1, con cinta gráfica azul y el titular La cerveza que te lleva hasta el final.",
     client: "Peroni Nastro Azzurro",
     gallery: [
       { type: "video", src: "/work/client-peroni-mar.mp4", poster: "/work/client-peroni-mar-poster.jpg", label: "Story — mesa frente al mar" },
@@ -234,6 +246,7 @@ export const PROJECTS: Project[] = [
     year: "2023",
     note: "Cliente real",
     image: "/work/client-locatour-feed.jpg",
+    alt: "Dos copas de vino tinto brindando frente al mar, junto a una botella de Locatour Red Blend, con el mensaje El mejor vino se comparte con la mejor persona.",
     client: "Locatour",
     gallery: [
       { type: "video", src: "/work/client-locatour-viaje.mp4", poster: "/work/client-locatour-viaje-poster.jpg", label: "Post animado — La vida es un viaje" },
@@ -255,6 +268,7 @@ export const PROJECTS: Project[] = [
     year: "2023",
     note: "Cliente real — pieza impresa",
     image: "/work/client-lyr-revista.jpg",
+    alt: "Aviso de revista para L&R Muebles, campaña de Día de las Madres, con foto de una sala de estar moderna y el titular Donde todos califican.",
     client: "L&R",
     featured: false,
     role: "Diseño de aviso para revista impresa",
@@ -273,6 +287,7 @@ export const PROJECTS: Project[] = [
     year: "2023",
     note: "Cliente real",
     image: "/work/client-fresita-poster.jpg",
+    alt: "Botella de espumante Fresita rodeada de fresas ilustradas sobre fondo rosa, con el eslogan Joven, Fresca, Divertida, Atrevida.",
     client: "Fresita",
     gallery: [
       { type: "video", src: "/work/client-fresita.mp4", poster: "/work/client-fresita-poster.jpg", label: "Post animado — Joven, fresca, divertida" },

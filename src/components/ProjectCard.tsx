@@ -6,7 +6,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <article className={styles.card}>
       <div className={styles.media} data-cursor="rec">
-        <Image src={project.image} alt={project.title} fill sizes="(max-width: 900px) 100vw, 33vw" />
+        <Image src={project.image} alt={project.alt} fill sizes="(max-width: 900px) 100vw, 33vw" />
       </div>
       <div className={styles.body}>
         <span className="tagPill" data-dept={project.dept}>

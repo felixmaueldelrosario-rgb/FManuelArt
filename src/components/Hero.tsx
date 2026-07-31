@@ -4,7 +4,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import gsap from "gsap";
 import Logo from "./Logo";
-import { INTRO_TOTAL_SECONDS } from "./Loader";
+import { INTRO_DONE_EVENT, introResolved } from "./Loader";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
+import ErrorBoundary from "./ErrorBoundary";
 import styles from "./Hero.module.css";
 
 const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
@@ -27,8 +29,7 @@ export default function Hero() {
   const [show3D, setShow3D] = useState(false);
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || !supportsWebGL()) return;
+    if (prefersReducedMotion() || !supportsWebGL()) return;
 
     const mq = window.matchMedia("(min-width: 861px)");
     const sync = () => setShow3D(mq.matches);
@@ -42,28 +43,36 @@ export default function Hero() {
   }, []);
 
   useLayoutEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const freshSession = !sessionStorage.getItem("fma-intro-seen");
-    const delay = freshSession ? INTRO_TOTAL_SECONDS - 0.3 : 0;
+    if (prefersReducedMotion()) return;
 
     const targets = [markRef.current, eyebrowRef.current, titleRef.current, subtitleRef.current, actionsRef.current].filter(
       Boolean
     );
 
+    let tween: gsap.core.Tween | undefined;
     const ctx = gsap.context(() => {
-      gsap.from(targets, {
+      tween = gsap.from(targets, {
         y: 22,
         opacity: 0,
         filter: "blur(6px)",
         duration: 0.8,
-        delay,
         stagger: 0.12,
         ease: "power2.out",
+        paused: true,
       });
     });
 
-    return () => ctx.revert();
+    const onIntroDone = () => tween?.play();
+    if (introResolved) {
+      tween?.play();
+    } else {
+      window.addEventListener(INTRO_DONE_EVENT, onIntroDone, { once: true });
+    }
+
+    return () => {
+      window.removeEventListener(INTRO_DONE_EVENT, onIntroDone);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -71,7 +80,9 @@ export default function Hero() {
       <div className={styles.glow} aria-hidden="true" />
       {show3D && (
         <div className={styles.scene} aria-hidden="true">
-          <HeroScene />
+          <ErrorBoundary>
+            <HeroScene />
+          </ErrorBoundary>
         </div>
       )}
       <div className={styles.inner}>

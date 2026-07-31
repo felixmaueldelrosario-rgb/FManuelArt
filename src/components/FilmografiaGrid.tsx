@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { PROJECTS, DEPT_LABELS, type Dept } from "@/data/projects";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 import ProjectCard from "./ProjectCard";
 import styles from "./FilmografiaGrid.module.css";
 
@@ -22,7 +23,7 @@ export default function FilmografiaGrid() {
   useLayoutEffect(() => {
     const el = gridRef.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (prefersReducedMotion()) return;
 
     const cards = el.querySelectorAll("article");
     if (!cards.length) return;

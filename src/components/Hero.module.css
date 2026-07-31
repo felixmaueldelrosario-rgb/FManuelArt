@@ -50,6 +50,16 @@
   max-width: 1100px;
 }
 
+/* Guarantee real breathing room between the headline and the rotating 3D
+   mark instead of hoping the object's silhouette stays out of the way —
+   reserve the scene's actual width (mirrors .scene above) plus a fixed
+   buffer, whenever the scene is actually visible. */
+@media (min-width: 861px) {
+  .inner {
+    max-width: min(1100px, calc(100% - min(52vw, 640px) - 3rem));
+  }
+}
+
 .mark {
   margin-bottom: 1.6rem;
 }

@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
+import gsap from "gsap";
 import Logo from "./Logo";
+import { useDialogA11y } from "@/hooks/useDialogA11y";
 import styles from "./SiteHeader.module.css";
 
 const LINKS = [
@@ -16,7 +17,13 @@ const LINKS = [
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuMounted, setMenuMounted] = useState(false);
   const [reelOpen, setReelOpen] = useState(false);
+  const [reelMounted, setReelMounted] = useState(false);
+
+  const menuRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -28,6 +35,59 @@ export default function SiteHeader() {
   useEffect(() => {
     document.body.style.overflow = menuOpen || reelOpen ? "hidden" : "";
   }, [menuOpen, reelOpen]);
+
+  useDialogA11y(menuOpen, menuRef, () => setMenuOpen(false));
+  useDialogA11y(reelOpen, overlayRef, () => setReelOpen(false));
+
+  // Mobile menu mount + exit
+  useLayoutEffect(() => {
+    if (menuOpen) {
+      setMenuMounted(true);
+      return;
+    }
+    if (!menuRef.current) return;
+    gsap.to(menuRef.current, {
+      opacity: 0,
+      y: -18,
+      duration: 0.25,
+      ease: "power2.in",
+      onComplete: () => setMenuMounted(false),
+    });
+  }, [menuOpen]);
+
+  // Mobile menu enter (runs once the node exists)
+  useLayoutEffect(() => {
+    if (!menuMounted || !menuOpen || !menuRef.current) return;
+    gsap.fromTo(
+      menuRef.current,
+      { opacity: 0, y: -18 },
+      { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }
+    );
+  }, [menuMounted, menuOpen]);
+
+  // Reel modal mount + exit
+  useLayoutEffect(() => {
+    if (reelOpen) {
+      setReelMounted(true);
+      return;
+    }
+    if (!overlayRef.current || !modalRef.current) return;
+    gsap
+      .timeline({ onComplete: () => setReelMounted(false) })
+      .to(modalRef.current, { opacity: 0, scale: 0.94, duration: 0.25, ease: "power2.in" }, 0)
+      .to(overlayRef.current, { opacity: 0, duration: 0.25, ease: "power2.in" }, 0);
+  }, [reelOpen]);
+
+  // Reel modal enter
+  useLayoutEffect(() => {
+    if (!reelMounted || !reelOpen || !overlayRef.current || !modalRef.current) return;
+    gsap.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25 });
+    gsap.fromTo(
+      modalRef.current,
+      { opacity: 0, scale: 0.94 },
+      { opacity: 1, scale: 1, duration: 0.3, ease: "power3.out" }
+    );
+  }, [reelMounted, reelOpen]);
 
   return (
     <>
@@ -62,80 +122,62 @@ export default function SiteHeader() {
         </button>
       </header>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            key="mobile-menu"
-            className={styles.mobileMenu}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Menú"
-            initial={{ opacity: 0, y: -18 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -18 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className={styles.mobileMenuHead}>
-              <Logo size={30} />
-              <button className={styles.mobileClose} onClick={() => setMenuOpen(false)}>
-                Cerrar ✕
-              </button>
-            </div>
-            <ul className={styles.mobileLinks}>
-              {LINKS.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} onClick={() => setMenuOpen(false)}>
-                    <span className={styles.num}>{l.num}</span>
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <button
-              className={`${styles.reelBtn} ${styles.mobileReel}`}
-              onClick={() => {
-                setMenuOpen(false);
-                setReelOpen(true);
-              }}
-            >
-              Reel
+      {menuMounted && (
+        <div
+          ref={menuRef}
+          className={styles.mobileMenu}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú"
+        >
+          <div className={styles.mobileMenuHead}>
+            <Logo size={30} />
+            <button className={styles.mobileClose} onClick={() => setMenuOpen(false)}>
+              Cerrar ✕
             </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {reelOpen && (
-          <motion.div
-            key="reel-modal"
-            className={styles.modalOverlay}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Showreel"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={(e) => {
-              if (e.target === e.currentTarget) setReelOpen(false);
+          </div>
+          <ul className={styles.mobileLinks}>
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} onClick={() => setMenuOpen(false)}>
+                  <span className={styles.num}>{l.num}</span>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <button
+            className={`${styles.reelBtn} ${styles.mobileReel}`}
+            onClick={() => {
+              setMenuOpen(false);
+              setReelOpen(true);
             }}
           >
-            <motion.div
-              className={styles.modal}
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.94 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <button className={styles.modalClose} onClick={() => setReelOpen(false)}>
-                Cerrar ✕
-              </button>
-              <span className={styles.modalSlate}>Escena · Reel · En producción</span>
-              <span className={styles.modalTitle}>Tu showreel va aquí.</span>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Reel
+          </button>
+        </div>
+      )}
+
+      {reelMounted && (
+        <div
+          ref={overlayRef}
+          className={styles.modalOverlay}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Showreel"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setReelOpen(false);
+          }}
+        >
+          <div className={styles.modal} ref={modalRef}>
+            <button className={styles.modalClose} onClick={() => setReelOpen(false)}>
+              Cerrar ✕
+            </button>
+            <span className={styles.modalSlate}>Escena · Reel · En producción</span>
+            <span className={styles.modalTitle}>Tu showreel va aquí.</span>
+          </div>
+        </div>
+      )}
     </>
   );
 }
