@@ -1,2 +1,2 @@
-// TODO: reemplazar por el dominio real una vez que el sitio esté publicado.
-export const SITE_URL = "https://fmanuelart.com";
+// TODO: reemplazar por el dominio real cuando esté conectado en Vercel.
+export const SITE_URL = "https://f-manuel-art.vercel.app";
