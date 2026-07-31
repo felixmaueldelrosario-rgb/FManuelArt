@@ -9,7 +9,7 @@ import styles from "./SiteHeader.module.css";
 const LINKS = [
   { num: "01", label: "Filmografía", href: "/filmografia" },
   { num: "02", label: "Departamentos", href: "/#departamentos" },
-  { num: "03", label: "Estudio", href: "/#estudio" },
+  { num: "03", label: "Estudio", href: "/estudio" },
   { num: "04", label: "Contacto", href: "/#contacto" },
 ];
 

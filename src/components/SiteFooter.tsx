@@ -8,7 +8,7 @@ export default function SiteFooter() {
         <span className={styles.role}>Navegación</span>
         <a href="/filmografia">Filmografía</a>
         <a href="/#departamentos">Departamentos</a>
-        <a href="/#estudio">Estudio</a>
+        <a href="/estudio">Estudio</a>
       </div>
       <div>
         <span className={styles.role}>Departamentos</span>

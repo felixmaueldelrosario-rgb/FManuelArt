@@ -54,7 +54,8 @@
       "Bash(curl -s -o /dev/null -w \"poster1: %{http_code} %{size_download}\\\\n\" http://localhost:3000/work/speed-painting-1-poster.jpg)",
       "Bash(curl -s -o /dev/null -w \"poster2: %{http_code} %{size_download}\\\\n\" http://localhost:3000/work/speed-painting-2-poster.jpg)",
       "Bash(rm -rf \"/d/Fmanuel art web/.next\")",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(grep -n \"estudio\\\\|filmografia\\\\`\" \"/d/Fmanuel art web/src/app/sitemap.ts\")"
     ]
   }
 }

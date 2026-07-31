@@ -84,9 +84,9 @@ export default function Hero() {
           <span>Diseño · Ilustración · Motion · Publicidad</span>
         </div>
         <h1 className={styles.title} ref={titleRef}>
-          No diseño logos.
+          Cada proyecto merece una <em>historia</em>.
           <br />
-          <em>Dirijo</em> la primera impresión de una marca.
+          Mi trabajo es darle una identidad capaz de contarla.
         </h1>
         <p className={styles.subtitle} ref={subtitleRef}>
           Soy FManuel Art — diseñador gráfico, publicista, ilustrador y motion designer. Cada

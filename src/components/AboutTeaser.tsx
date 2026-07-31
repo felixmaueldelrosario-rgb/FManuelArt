@@ -9,13 +9,13 @@ export default function AboutTeaser() {
           <span className="num">ESC. 04</span>
           <span>Detrás de cámaras</span>
         </div>
-        <h2>El proceso importa tanto como el resultado.</h2>
+        <h2>No creo en el diseño como un simple ejercicio estético.</h2>
         <p>
-          Cada proyecto empieza en el papel: bocetos, referencias, pruebas de color. Esa parte
-          del trabajo casi nunca se muestra — acá, comprimida en un timelapse, es parte de la
-          historia.
+          Creo que cada marca, ilustración o animación es una oportunidad para contar una
+          historia y provocar una emoción desde el primer instante. Cada proyecto empieza en el
+          papel — acá, comprimido en un timelapse, es parte de la historia.
         </p>
-        <a className="btnGhost" href="#contacto" style={{ marginTop: "1.4rem", display: "inline-flex" }}>
+        <a className="btnGhost" href="/estudio" style={{ marginTop: "1.4rem", display: "inline-flex" }}>
           Conocer el estudio
         </a>
       </Reveal>
