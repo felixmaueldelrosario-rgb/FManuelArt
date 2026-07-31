@@ -54,7 +54,7 @@
   transform: scale(1);
 }
 
-.card > * {
+.card > *:not(.cardImage) {
   position: relative;
   z-index: 1;
 }
