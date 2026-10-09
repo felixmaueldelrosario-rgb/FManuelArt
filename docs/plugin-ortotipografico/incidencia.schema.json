@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/ortotipografia/v1/respuesta-revision.json",
+  "title": "RespuestaRevision",
+  "description": "Resultado de revisar uno o varios bloques de texto de un documento de diseño. Las posiciones son offsets en unidades de código UTF-16 sobre el texto lógico del bloque (sin transformaciones visuales como VERSALES).",
+  "type": "object",
+  "required": ["version", "documentoId", "versionReglas", "fuente", "generadoEn", "bloques"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "const": "1.0" },
+    "documentoId": { "type": "string", "minLength": 1 },
+    "versionReglas": { "type": "string", "description": "Versión del motor y las reglas; invalida cachés." },
+    "fuente": { "enum": ["local", "nube"] },
+    "retencion": { "enum": ["ninguna", "temporal"], "description": "Solo para fuente = nube." },
+    "generadoEn": { "type": "string", "format": "date-time" },
+    "bloques": { "type": "array", "items": { "$ref": "#/$defs/ResultadoBloque" } }
+  },
+  "$defs": {
+    "ResultadoBloque": {
+      "type": "object",
+      "required": ["bloqueId", "hash", "idioma", "incidencias", "latenciaMs"],
+      "additionalProperties": false,
+      "properties": {
+        "bloqueId": { "type": "string" },
+        "hash": { "type": "string" },
+        "idioma": { "$ref": "#/$defs/Idioma" },
+        "latenciaMs": { "type": "number", "minimum": 0 },
+        "incidencias": { "type": "array", "items": { "$ref": "#/$defs/Incidencia" } },
+        "resueltas": {
+          "type": "array",
+          "description": "Solo en respuestas incrementales: ids de incidencias que ya no aplican.",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "Idioma": {
+      "type": "object",
+      "required": ["codigo", "origen"],
+      "additionalProperties": false,
+      "properties": {
+        "codigo": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Z]{2})?$", "examples": ["es-ES", "es-MX", "en-US"] },
+        "origen": { "enum": ["detectado", "estilo_host", "manual"] },
+        "probabilidad": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "Incidencia": {
+      "type": "object",
+      "required": ["id", "tipo", "confianza", "impacto", "original", "sugerencias", "explicacion", "vistaPrevia", "metadatos", "estado"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "tipo": { "enum": ["ortografia", "tecla_adyacente", "mayusculas", "puntuacion", "espaciado", "guiones", "comillas", "gramatica"] },
+        "reglaId": { "type": "string", "description": "Identificador de la regla que la generó, p. ej. ES_ESPACIO_ANTES_COMA." },
+        "confianza": {
+          "type": "object",
+          "required": ["nivel", "puntuacion"],
+          "additionalProperties": false,
+          "properties": {
+            "nivel": { "enum": ["alta", "mediana", "baja"] },
+            "puntuacion": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "impacto": {
+          "type": "object",
+          "required": ["nivel", "motivos"],
+          "additionalProperties": false,
+          "properties": {
+            "nivel": { "enum": ["critico", "medio", "bajo"] },
+            "motivos": {
+              "type": "array",
+              "items": { "enum": ["componente_maestro", "instancia_con_override", "logo_o_titular", "texto_en_trazado", "cambia_lineas", "desborda_marco", "cambia_ancho", "texto_ui", "cuerpo"] }
+            },
+            "instanciasAfectadas": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "original": { "type": "string" },
+        "sugerencias": {
+          "type": "array",
+          "description": "Ordenadas de mayor a menor probabilidad. Vacía si se requiere decisión del usuario (requierePregunta = true).",
+          "items": { "type": "string" },
+          "maxItems": 5
+        },
+        "requierePregunta": { "type": "boolean", "default": false, "description": "La intención del diseño no es clara; la UI debe preguntar antes de proponer." },
+        "explicacion": { "type": "string", "maxLength": 240, "description": "1–2 frases en el idioma de la interfaz." },
+        "referencia": { "type": "string", "format": "uri", "description": "Enlace opcional a la norma (RAE, Fundéu…)." },
+        "vistaPrevia": {
+          "type": "object",
+          "required": ["antes", "despues"],
+          "additionalProperties": false,
+          "properties": {
+            "antes": { "type": "string", "description": "Fragmento de contexto con el error." },
+            "despues": { "type": "string", "description": "Mismo fragmento con la primera sugerencia aplicada (no se escribe en el documento)." },
+            "reflow": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "lineasAntes": { "type": "integer" },
+                "lineasDespues": { "type": "integer" },
+                "deltaAnchoPt": { "type": "number" },
+                "desborda": { "type": "boolean" }
+              }
+            }
+          }
+        },
+        "metadatos": { "$ref": "#/$defs/Metadatos" },
+        "estado": { "enum": ["pendiente", "aceptada", "ignorada_una_vez", "ignorada_proyecto", "anadida_diccionario", "editada_manual", "auto_aplicada", "revertida"] },
+        "autoAplicable": { "type": "boolean", "description": "true solo si confianza = alta, impacto = bajo y no es componente maestro." }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "autoAplicable": { "const": true } }, "required": ["autoAplicable"] },
+          "then": {
+            "properties": {
+              "confianza": { "properties": { "nivel": { "const": "alta" } } },
+              "impacto": { "properties": { "nivel": { "const": "bajo" } } }
+            }
+          }
+        }
+      ]
+    },
+    "Metadatos": {
+      "type": "object",
+      "required": ["host", "posicion", "capa"],
+      "additionalProperties": false,
+      "properties": {
+        "host": { "enum": ["indesign", "illustrator", "photoshop", "figma", "affinity"] },
+        "posicion": {
+          "type": "object",
+          "required": ["inicio", "fin"],
+          "additionalProperties": false,
+          "properties": {
+            "inicio": { "type": "integer", "minimum": 0 },
+            "fin": { "type": "integer", "minimum": 0 },
+            "linea": { "type": "integer", "minimum": 1 },
+            "pagina": { "type": "string", "description": "Página, artboard o frame." }
+          }
+        },
+        "capa": {
+          "type": "object",
+          "required": ["id", "nombre"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "type": "string" },
+            "nombre": { "type": "string" },
+            "ruta": { "type": "array", "items": { "type": "string" }, "description": "Jerarquía desde la raíz." },
+            "tipoTexto": { "enum": ["area", "punto", "trazado", "story"] },
+            "componente": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "rol": { "enum": ["maestro", "instancia", "simbolo"] },
+                "maestroId": { "type": "string" },
+                "nombre": { "type": "string" }
+              }
+            }
+          }
+        },
+        "estilo": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "estiloParrafo": { "type": "string" },
+            "estiloCaracter": { "type": "string" },
+            "fuente": { "type": "string" },
+            "cuerpoPt": { "type": "number" },
+            "trackingMilesimas": { "type": "number" },
+            "leadingPt": { "type": ["number", "string"] },
+            "caps": { "enum": ["normal", "versales", "mayusculas_forzadas", "escrito_en_mayusculas"] }
+          }
+        }
+      }
+    },
+    "ReglasEstilo": {
+      "type": "object",
+      "description": "Reglas de equipo/proyecto. Se heredan equipo → proyecto → documento.",
+      "additionalProperties": false,
+      "properties": {
+        "idiomas": { "type": "array", "items": { "type": "string" } },
+        "titulos": { "enum": ["oracion", "titulo", "libre"] },
+        "comillas": { "enum": ["angulares", "inglesas", "simples", "libre"] },
+        "rangosConSemirraya": { "type": "boolean" },
+        "incisosConRaya": { "type": "boolean" },
+        "abreviaturasPermitidas": { "type": "array", "items": { "type": "string" } },
+        "palabrasProtegidas": { "type": "array", "items": { "type": "string" } },
+        "espacioFinoFrances": { "type": "boolean" },
+        "guionacion": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "minAntes": { "type": "integer", "minimum": 1 },
+            "minDespues": { "type": "integer", "minimum": 1 },
+            "partirNombresPropios": { "type": "boolean" }
+          }
+        },
+        "toleranciaReflowPt": { "type": "number", "minimum": 0, "default": 0.5 },
+        "cuerpoTitularPt": { "type": "number", "default": 36 },
+        "autoAplicar": { "type": "boolean", "default": false },
+        "nube": { "enum": ["desactivada", "por_envio", "por_sesion"], "default": "desactivada" },
+        "anonimizar": { "type": "boolean", "default": true }
+      }
+    }
+  }
+}

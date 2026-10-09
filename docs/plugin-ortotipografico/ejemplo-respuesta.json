@@ -1,0 +1,59 @@
+{
+  "version": "1.0",
+  "documentoId": "catalogo-otono.indd",
+  "versionReglas": "core-1.4.0+es-2026.09",
+  "fuente": "local",
+  "generadoEn": "2026-10-09T17:30:00Z",
+  "bloques": [
+    {
+      "bloqueId": "story-u1a2/p3",
+      "hash": "9f2c1e0b7a",
+      "idioma": { "codigo": "es-ES", "origen": "detectado", "probabilidad": 0.98 },
+      "latenciaMs": 42,
+      "incidencias": [
+        {
+          "id": "inc-001",
+          "tipo": "espaciado",
+          "reglaId": "ES_ESPACIO_ANTES_COMA",
+          "confianza": { "nivel": "alta", "puntuacion": 0.99 },
+          "impacto": { "nivel": "bajo", "motivos": ["cuerpo"] },
+          "original": "otoño ,",
+          "sugerencias": ["otoño,"],
+          "explicacion": "En español no se escribe espacio antes de la coma.",
+          "vistaPrevia": {
+            "antes": "La colección de otoño , ya disponible",
+            "despues": "La colección de otoño, ya disponible",
+            "reflow": { "lineasAntes": 2, "lineasDespues": 2, "deltaAnchoPt": -2.1, "desborda": false }
+          },
+          "metadatos": {
+            "host": "indesign",
+            "posicion": { "inicio": 16, "fin": 23, "linea": 1, "pagina": "4" },
+            "capa": { "id": "u1a2", "nombre": "Texto intro", "ruta": ["Pág. 4", "Texto"], "tipoTexto": "story" },
+            "estilo": { "estiloParrafo": "Cuerpo", "fuente": "Freight Text Pro Book", "cuerpoPt": 10, "trackingMilesimas": 0, "leadingPt": 13, "caps": "normal" }
+          },
+          "estado": "pendiente",
+          "autoAplicable": true
+        },
+        {
+          "id": "inc-002",
+          "tipo": "ortografia",
+          "reglaId": "HUNSPELL_ES",
+          "confianza": { "nivel": "baja", "puntuacion": 0.31 },
+          "impacto": { "nivel": "critico", "motivos": ["logo_o_titular", "componente_maestro"], "instanciasAfectadas": 12 },
+          "original": "AcmeCo",
+          "sugerencias": ["Acme Co"],
+          "explicacion": "Palabra no encontrada en el diccionario. Puede ser una marca: añádela al diccionario del proyecto si es correcta.",
+          "vistaPrevia": { "antes": "AcmeCo · Otoño 2026", "despues": "Acme Co · Otoño 2026" },
+          "metadatos": {
+            "host": "indesign",
+            "posicion": { "inicio": 0, "fin": 6, "pagina": "Maestra A" },
+            "capa": { "id": "u9f0", "nombre": "Cabecera marca", "tipoTexto": "area", "componente": { "rol": "maestro", "nombre": "A-Maestra" } },
+            "estilo": { "estiloParrafo": "Marca", "cuerpoPt": 48, "trackingMilesimas": 120, "caps": "versales" }
+          },
+          "estado": "pendiente",
+          "autoAplicable": false
+        }
+      ]
+    }
+  ]
+}
