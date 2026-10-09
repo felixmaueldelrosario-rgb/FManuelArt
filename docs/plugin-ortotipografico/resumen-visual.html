@@ -1,0 +1,343 @@
+<title>Corrector Ortotipográfico para Diseño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: hoja de pruebas de imprenta — columna de lectura con anotaciones al margen en lápiz azul de corrector */
+:root{
+  --bg:#f5f6f8; --paper:#ffffff; --ink:#1b1f27; --muted:#5b6475; --rule:#dde1e8;
+  --accent:#1f63b0; --accent-soft:#e6eff9;
+  --crit:#b3261e; --crit-soft:#fbe9e7; --mid:#9a6400; --mid-soft:#fdf2dc; --low:#2e7d4f; --low-soft:#e5f4ea;
+  --f-display:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --f-body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12151b; --paper:#1a1e26; --ink:#e7eaf0; --muted:#9aa3b4; --rule:#2c323d;
+  --accent:#7fb2ec; --accent-soft:#1c2a3c;
+  --crit:#f28b82; --crit-soft:#3a1f1d; --mid:#f0c060; --mid-soft:#35290f; --low:#7fd3a0; --low-soft:#16301f;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151b; --paper:#1a1e26; --ink:#e7eaf0; --muted:#9aa3b4; --rule:#2c323d;
+  --accent:#7fb2ec; --accent-soft:#1c2a3c;
+  --crit:#f28b82; --crit-soft:#3a1f1d; --mid:#f0c060; --mid-soft:#35290f; --low:#7fd3a0; --low-soft:#16301f;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body);padding-inline:16px;padding-block:40px 72px}
+.wrap{max-width:860px;margin:0 auto;display:grid;gap:56px}
+header{display:grid;gap:14px}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font:400 clamp(40px,7vw,64px)/1.02 var(--f-display);margin:0;text-wrap:balance}
+h1 em{color:var(--accent)}
+.lede{font-size:18px;color:var(--muted);max-width:62ch;margin:0}
+h2{font:400 32px/1.15 var(--f-display);margin:0 0 6px;text-wrap:balance}
+section{display:grid;gap:16px}
+section>p{margin:0;max-width:65ch}
+.note{color:var(--muted);font-size:15px}
+.pill{display:inline-flex;align-items:center;gap:6px;font:500 12px/1 var(--f-body);padding:5px 9px;border-radius:999px;white-space:nowrap}
+.p-crit{background:var(--crit-soft);color:var(--crit)} .p-mid{background:var(--mid-soft);color:var(--mid)} .p-low{background:var(--low-soft);color:var(--low)}
+.p-acc{background:var(--accent-soft);color:var(--accent)}
+/* errores marcados como en una prueba de imprenta */
+.mark{text-decoration:underline wavy var(--crit);text-underline-offset:4px}
+.fix{color:var(--accent);font-style:italic}
+
+/* principios */
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.principle{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:18px;display:grid;gap:6px;align-content:start}
+.principle b{font-weight:600}
+.principle span{color:var(--muted);font-size:15px}
+
+/* huecos */
+.gaps{display:grid;gap:0;border-top:1px solid var(--rule)}
+.gap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:20px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.gap h3{margin:0;font:600 16px/1.35 var(--f-body)}
+.gap p{margin:0;font-size:15px}
+.gap .why{color:var(--muted);font-size:14px;margin-top:4px;font-weight:400}
+@media (max-width:620px){.gap{grid-template-columns:1fr;gap:6px}}
+
+/* matriz */
+.matrix-wrap{overflow-x:auto}
+.matrix{display:grid;grid-template-columns:110px repeat(3,minmax(120px,1fr));gap:6px;min-width:500px}
+.matrix .h{font:500 12px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:8px;display:flex;align-items:end}
+.matrix .rh{align-items:center}
+.cell{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:12px;font-size:14px;min-height:76px;display:grid;gap:4px;align-content:start}
+.cell.auto{background:var(--low-soft);border-color:var(--low)}
+.cell.auto b{color:var(--low)}
+.cell.ask{background:var(--crit-soft);border-color:transparent}
+.cell small{color:var(--muted)}
+
+/* mockup panel */
+.mock{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
+@media (max-width:760px){.mock{grid-template-columns:1fr}}
+.canvas{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:28px;display:grid;gap:14px;min-height:100%}
+.canvas .art-h{font:400 34px/1.05 var(--f-display)}
+.canvas p{margin:0;font-size:15px;max-width:42ch}
+.canvas .lbl{font:500 11px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.under{text-decoration:underline dotted var(--accent);text-decoration-thickness:2px;text-underline-offset:4px;background:var(--accent-soft);border-radius:2px}
+.panel{background:var(--paper);border:1px solid var(--rule);border-radius:10px;overflow:hidden;font-size:14px}
+.panel-top{padding:12px 14px;border-bottom:1px solid var(--rule);display:grid;gap:8px}
+.panel-title{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.panel-title span{font:400 12px var(--f-mono);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 12px/1 var(--f-body);border:1px solid var(--rule);border-radius:999px;padding:6px 9px;background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.group{padding:8px 14px 4px;font:500 11px/1.4 var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.issue{margin:0 10px 8px;border:1px solid var(--rule);border-radius:8px;padding:10px 12px;display:grid;gap:6px;cursor:pointer;background:transparent;text-align:left;color:inherit;font:inherit;width:calc(100% - 20px)}
+.issue[aria-expanded="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.issue .row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.issue .chg{font-family:var(--f-mono);font-size:13px}
+.issue .more{display:none;gap:8px}
+.issue[aria-expanded="true"] .more{display:grid}
+.issue .exp{color:var(--muted);font-size:13px}
+.prev{background:var(--bg);border-radius:6px;padding:8px;font-size:13px}
+.prev b{font:500 10px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.btn{font:500 12px/1 var(--f-body);padding:7px 10px;border-radius:6px;border:1px solid var(--rule);background:var(--paper);color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.warn{color:var(--crit);font-size:13px}
+.panel-foot{border-top:1px solid var(--rule);padding:10px 14px;display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.empty{padding:16px 14px;color:var(--muted);font-size:13px}
+
+/* tabla hosts */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:500 12px/1.3 var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;white-space:nowrap}
+
+/* criterios */
+.criteria{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.crit{border-top:2px solid var(--ink);padding-top:10px;display:grid;gap:4px;align-content:start}
+.crit .num{font:400 40px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.crit span{color:var(--muted);font-size:14px}
+
+/* microcopy */
+.copy{display:grid;gap:8px}
+.toast{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--ink);color:var(--paper);border-radius:8px;padding:10px 14px;font-size:14px;max-width:520px}
+.toast u{text-underline-offset:3px;white-space:nowrap}
+
+/* fases */
+.phases{display:grid;gap:0;border-left:2px solid var(--rule);margin-left:6px}
+.phase{position:relative;padding:0 0 18px 22px;display:grid;gap:2px}
+.phase::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--accent)}
+.phase b{font-weight:600}
+.phase span{color:var(--muted);font-size:15px}
+
+footer{border-top:1px solid var(--rule);padding-top:20px;color:var(--muted);font-size:14px;display:grid;gap:6px}
+footer a{color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.issue{transition:border-color .15s, box-shadow .15s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Propuesta de diseño · Plugin</div>
+    <h1>Un corrector que <em>respeta</em> tu maqueta</h1>
+    <p class="lede">Revisa ortografía y tipografía dentro de Illustrator, InDesign, Photoshop, Figma y Affinity. Señala, explica y propone, pero nunca toca el kerning, el interletrado ni el interlineado, y no cambia nada sin tu permiso.</p>
+  </header>
+
+  <section>
+    <h2>Tres principios</h2>
+    <div class="principles">
+      <div class="principle"><b>Tú decides</b><span>No aplica nada solo. El modo automático es opcional y se limita a correcciones seguras que no mueven el diseño.</span></div>
+      <div class="principle"><b>Dos preguntas por error</b><span>¿Qué tan seguro está de que es un error? ¿Cuánto afecta al diseño corregirlo?</span></div>
+      <div class="principle"><b>Tu texto se queda contigo</b><span>Todo se revisa en tu equipo. La nube es opcional y antes te muestra exactamente qué texto saldría.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lo que le faltaba al brief</h2>
+    <p class="note">Puntos que conviene decidir antes de empezar a programar.</p>
+    <div class="gaps">
+      <div class="gap"><h3>«95 % de precisión» no basta<div class="why">Un corrector que marca muy poco también llega al 95 %.</div></h3><p>Pedir además que detecte al menos el 90 % de los errores reales y que no marque más de 2 palabras correctas por cada 1000.</p></div>
+      <div class="gap"><h3>«Archivo medio» no está definido<div class="why">Sin esa definición, la meta de velocidad no se puede comprobar.</div></h3><p>Propuesta: hasta 300 cajas de texto y 15 000 palabras. Medir el caso lento, no el promedio.</p></div>
+      <div class="gap"><h3>«Cero reflow» es imposible<div class="why">Cambiar <code>"</code> por <code>«</code> ya cambia el ancho del texto.</div></h3><p>Lo que sí se garantiza es que nunca sea una sorpresa. El plugin mide antes y después, y si el texto cambia de líneas, deshace el cambio y te pregunta.</p></div>
+      <div class="gap"><h3>Las reglas cambian según el idioma<div class="why">En francés, <code>; : ! ?</code> sí llevan espacio delante.</div></h3><p>Las reglas se aplican por idioma de cada bloque de texto, no a todo el documento.</p></div>
+      <div class="gap"><h3>Las comillas son una decisión de marca<div class="why">La RAE prefiere « », pero muchas marcas usan “ ”.</div></h3><p>Se elige una vez por proyecto y el plugin la respeta.</p></div>
+      <div class="gap"><h3>Componentes y símbolos<div class="why">Corregir el maestro cambia todas sus copias.</div></h3><p>Se marca como crítico y te dice cuántas copias afecta, por ejemplo «afecta a 12 instancias».</p></div>
+      <div class="gap"><h3>Affinity<div class="why">Hasta donde sé, no tiene un sistema público de plugins.</div></h3><p>Para empezar: importar el texto, revisarlo y sacar un informe. La integración completa, cuando Affinity lo permita.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cómo decide qué hacer con cada error</h2>
+    <p>Cada error se ubica en esta tabla. Solo la casilla verde se puede corregir automáticamente, y solo si activas ese modo.</p>
+    <div class="matrix-wrap">
+      <div class="matrix" role="table" aria-label="Confianza por impacto">
+        <div class="h"></div>
+        <div class="h">Impacto bajo<br>texto corrido</div>
+        <div class="h">Impacto medio<br>titulares, botones</div>
+        <div class="h">Impacto crítico<br>logos, maestros, cambia líneas</div>
+
+        <div class="h rh">Confianza alta</div>
+        <div class="cell auto"><b>Auto-aplicable</b><small>«otoño ,» → «otoño,»</small></div>
+        <div class="cell"><b>Sugerir</b><small>con vista previa</small></div>
+        <div class="cell ask"><b>Confirmar</b><small>avisa si añade una línea</small></div>
+
+        <div class="h rh">Confianza media</div>
+        <div class="cell"><b>Sugerir</b><small>«sesión» / «cesión»</small></div>
+        <div class="cell"><b>Sugerir</b><small>con opciones</small></div>
+        <div class="cell ask"><b>Confirmar</b></div>
+
+        <div class="h rh">Confianza baja</div>
+        <div class="cell"><b>Preguntar</b><small>¿es una marca?</small></div>
+        <div class="cell"><b>Preguntar</b></div>
+        <div class="cell ask"><b>Preguntar</b><small>«AcmeCo» en el logo</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Así se vería el panel</h2>
+    <p class="note">Maqueta interactiva: toca una incidencia para abrirla o usa los filtros.</p>
+    <div class="mock">
+      <div class="canvas" aria-label="Lienzo de ejemplo">
+        <div class="lbl">Pág. 4 · Catálogo de otoño</div>
+        <div class="art-h">Diseño que respira</div>
+        <p>La colección de <span class="under">otoño ,</span> ya disponible en tiendas. Piezas hechas a mano en <span class="under">Enero</span> con materiales locales.</p>
+        <p>Pregunta por la edición limitada de <span class="under">AcmeCo</span>.</p>
+        <div class="lbl">El subrayado es opcional y no se imprime</div>
+      </div>
+
+      <div class="panel" aria-label="Panel de sugerencias">
+        <div class="panel-top">
+          <div class="panel-title">Ortotipografía <span>Local · Español</span></div>
+          <div class="chips" role="group" aria-label="Filtros">
+            <button class="chip" id="f-all" data-f="all" aria-pressed="true">Todas 3</button>
+            <button class="chip" id="f-crit" data-f="crit" aria-pressed="false">Críticas 1</button>
+            <button class="chip" id="f-safe" data-f="safe" aria-pressed="false">Seguras 2</button>
+          </div>
+        </div>
+        <div class="group">Pág. 4 · Texto intro</div>
+        <button class="issue" data-k="safe" aria-expanded="true">
+          <div class="row"><span class="pill p-low">Impacto bajo</span><span class="pill p-acc">Confianza alta</span></div>
+          <div class="chg">«otoño ,» → «otoño,»</div>
+          <div class="more">
+            <div class="exp">En español no se escribe espacio antes de la coma.</div>
+            <div class="prev"><b>Vista previa</b>…de otoño, ya disponible…</div>
+            <div class="actions"><span class="btn primary">Aceptar</span><span class="btn">Ignorar</span><span class="btn">⋯</span></div>
+          </div>
+        </button>
+        <button class="issue" data-k="safe" aria-expanded="false">
+          <div class="row"><span class="pill p-low">Impacto bajo</span><span class="pill p-acc">Confianza alta</span></div>
+          <div class="chg">«Enero» → «enero»</div>
+          <div class="more">
+            <div class="exp">En español, los meses se escriben con minúscula.</div>
+            <div class="prev"><b>Vista previa</b>…hechas a mano en enero…</div>
+            <div class="actions"><span class="btn primary">Aceptar</span><span class="btn">Ignorar</span><span class="btn">⋯</span></div>
+          </div>
+        </button>
+        <div class="group">Maestra A · Cabecera marca</div>
+        <button class="issue" data-k="crit" aria-expanded="false">
+          <div class="row"><span class="pill p-crit">Impacto crítico</span><span class="pill p-mid">Confianza baja</span></div>
+          <div class="chg">«AcmeCo» no está en el diccionario</div>
+          <div class="more">
+            <div class="exp">Puede ser una marca. Si es correcta, añádela al diccionario del proyecto.</div>
+            <div class="warn">Está en una página maestra: afecta a 12 páginas.</div>
+            <div class="actions"><span class="btn primary">Añadir al diccionario</span><span class="btn">Ignorar siempre</span></div>
+          </div>
+        </button>
+        <div class="empty" id="empty" hidden>Nada con estos filtros.</div>
+        <div class="panel-foot"><span>3 pendientes</span><span>Historial · Informe</span></div>
+      </div>
+    </div>
+    <p class="note">El filtro «Seguras» muestra solo lo que el modo automático podría aplicar: confianza alta e impacto bajo.</p>
+  </section>
+
+  <section>
+    <h2>Qué puedes hacer con cada sugerencia</h2>
+    <div class="principles">
+      <div class="principle"><b>Aceptar</b><span>Aplica la corrección y la deja en el historial, de donde se puede revertir.</span></div>
+      <div class="principle"><b>Ignorar una vez</b><span>Solo esta aparición.</span></div>
+      <div class="principle"><b>Ignorar siempre</b><span>En todo el proyecto, sin volver a preguntar.</span></div>
+      <div class="principle"><b>Añadir al diccionario</b><span>Para marcas, nombres y términos propios del cliente.</span></div>
+      <div class="principle"><b>Editar en línea</b><span>Escribes tu propia corrección desde el panel.</span></div>
+      <div class="principle"><b>Revisar al final</b><span>En modo discreto no interrumpe: te muestra un resumen al guardar.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>En cada programa</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Programa</th><th>Cómo se integra</th><th>Cuidado especial</th></tr></thead>
+        <tbody>
+          <tr><td>InDesign</td><td>Panel nativo (UXP)</td><td>Textos enlazados entre varios marcos y páginas maestras.</td></tr>
+          <tr><td>Illustrator</td><td>Panel CEP</td><td>El texto de punto se ensancha en lugar de pasar de línea. Símbolos.</td></tr>
+          <tr><td>Photoshop</td><td>Panel nativo (UXP)</td><td>Texto dentro de objetos inteligentes: al principio solo se avisa.</td></tr>
+          <tr><td>Figma</td><td>Plugin de Figma</td><td>Componentes e instancias. Hay que cargar la fuente antes de editar.</td></tr>
+          <tr><td>Affinity</td><td>Importar y exportar</td><td>Sin sistema de plugins público, por ahora.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">El texto convertido en contornos no se puede revisar. El plugin te avisa de cuántos hay.</p>
+  </section>
+
+  <section>
+    <h2>Cómo sabremos que funciona</h2>
+    <div class="criteria">
+      <div class="crit"><div class="num">95 %</div><span>de lo que marca en español es un error real</span></div>
+      <div class="crit"><div class="num">90 %</div><span>de los errores reales se detectan</span></div>
+      <div class="crit"><div class="num">&lt; 300 ms</div><span>por bloque de texto, en el caso lento</span></div>
+      <div class="crit"><div class="num">0</div><span>cambios de líneas sin avisar</span></div>
+    </div>
+    <p class="note">Se prueba con unas 20 000 palabras de textos reales de diseño (catálogos, carteles, empaques, interfaces) en español de España, México y Argentina.</p>
+  </section>
+
+  <section>
+    <h2>Cómo habla el plugin</h2>
+    <p>Breve, de tú a tú y sin culpar. Algunos ejemplos:</p>
+    <div class="copy">
+      <div class="toast"><span>Sugerencia: «<span class="mark">teh</span>» → «<span>the</span>». Confianza alta.</span><u>Vista previa</u></div>
+      <div class="toast"><span>Añadido al diccionario del proyecto: AcmeCo</span><u>Deshacer</u></div>
+      <div class="toast"><span>Este cambio añade 1 línea al titular.</span><u>Aplicar igualmente</u></div>
+      <div class="toast"><span>Sin conexión: seguimos revisando con los diccionarios locales.</span></div>
+      <div class="toast"><span>Revisamos 38 bloques modificados.</span><u>Revisar ahora</u></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Privacidad</h2>
+    <div class="principles">
+      <div class="principle"><b>Local por defecto</b><span>Los diccionarios viven en tu equipo y funciona sin internet.</span></div>
+      <div class="principle"><b>Nube solo si la pides</b><span>Te muestra el texto exacto antes de enviarlo y no se guarda en el servidor.</span></div>
+      <div class="principle"><b>Datos ocultos</b><span>Correos, teléfonos, enlaces y nombres de cliente se reemplazan antes de salir.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Por etapas</h2>
+    <div class="phases">
+      <div class="phase"><b>1 · Primera versión</b><span>Figma e InDesign: ortografía, espacios y comillas. Aceptar, ignorar, diccionario e historial.</span></div>
+      <div class="phase"><b>2 · Versión completa</b><span>Illustrator y Photoshop, reglas de equipo, informes en PDF/CSV, control de reflow y componentes.</span></div>
+      <div class="phase"><b>3 · Nube opcional</b><span>Revisión en servidor propio, anonimización y aprendizaje de tus decisiones.</span></div>
+      <div class="phase"><b>4 · Más adelante</b><span>Affinity, cuando lo permita, y lectura de texto convertido en contornos.</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>El detalle técnico (formato de datos, servicios, pruebas) está en el repositorio, en <code>docs/plugin-ortotipografico/</code>.</span>
+    <a href="https://github.com/felixmaueldelrosario-rgb/FManuelArt/pull/1">Ver el pull request en GitHub</a>
+  </footer>
+</div>
+
+<script>
+const issues=[...document.querySelectorAll('.issue')];
+issues.forEach(b=>b.addEventListener('click',()=>{
+  const open=b.getAttribute('aria-expanded')==='true';
+  issues.forEach(o=>o.setAttribute('aria-expanded','false'));
+  b.setAttribute('aria-expanded',String(!open));
+}));
+const chips=[...document.querySelectorAll('.chip')];
+chips.forEach(c=>c.addEventListener('click',()=>{
+  chips.forEach(o=>o.setAttribute('aria-pressed',String(o===c)));
+  const f=c.dataset.f; let shown=0;
+  issues.forEach(i=>{const ok=f==='all'||i.dataset.k===f; i.hidden=!ok; if(ok)shown++;});
+  document.querySelectorAll('.group').forEach(g=>{
+    let n=g.nextElementSibling, vis=false;
+    while(n&&n.classList.contains('issue')){if(!n.hidden)vis=true;n=n.nextElementSibling;}
+    g.hidden=!vis;
+  });
+  document.getElementById('empty').hidden=shown>0;
+}));
+</script>
