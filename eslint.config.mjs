@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Plugin de corrección: proyecto aparte con su propio package.json.
+    "plugins/**",
   ]),
 ]);
 

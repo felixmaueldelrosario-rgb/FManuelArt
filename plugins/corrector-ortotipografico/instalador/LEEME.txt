@@ -1,0 +1,44 @@
+ORTOTIPOGRAFÍA · Corrector para Illustrator y Photoshop
+Versión 0.1.0 (prueba)
+
+INSTALAR
+  Mac:
+    1. Haz doble clic en «instalar-mac.command».
+       Si macOS dice que no puede abrirlo: clic derecho > Abrir > Abrir.
+    2. Cierra y vuelve a abrir Illustrator o Photoshop.
+
+  Windows:
+    1. Haz doble clic en «instalar-windows.bat».
+    2. Cierra y vuelve a abrir Illustrator o Photoshop.
+
+ABRIR EL PANEL
+  Ventana > Extensiones > Ortotipografía
+  (en Photoshop 2024 y posteriores: Ventana > Extensiones (heredadas) > Ortotipografía)
+
+USAR
+  - Pulsa «Revisar documento». Con «Revisar mientras edito» activado (en ⚙),
+    el panel vuelve a revisar solo los textos que cambiaron.
+  - Toca una sugerencia para ver la explicación y la vista previa.
+  - Aceptar, Ignorar, Ignorar siempre, Añadir al diccionario, Editar, Ver en el lienzo.
+  - Atajos con el panel enfocado: J/K o flechas para moverte, Enter acepta,
+    I ignora, Mayús+I ignora siempre, D añade al diccionario, E edita, L muestra en el lienzo.
+  - Historial: revierte cualquier corrección.
+  - Exportar informe CSV: todas las incidencias y lo que decidiste con cada una.
+
+QUÉ NO HACE (A PROPÓSITO)
+  - No cambia fuente, cuerpo, interletrado, kerning ni interlineado.
+  - No aplica nada sin que lo aceptes.
+  - En Illustrator, si una corrección hace que el texto de área cambie de
+    número de líneas, la deshace y te pregunta.
+  - En Photoshop, si una capa mezcla varios estilos, no la toca: Photoshop
+    los unificaría. Te avisa para que la corrijas a mano.
+  - Todo se revisa en tu equipo. No envía tu texto a internet.
+
+DESINSTALAR
+  Borra la carpeta com.fmanuel.ortotipografia de:
+    Mac:     ~/Library/Application Support/Adobe/CEP/extensions/
+    Windows: %APPDATA%\Adobe\CEP\extensions\
+
+DICCIONARIOS
+  Español e inglés de Hunspell (paquetes dictionary-es y dictionary-en de
+  wooorm). Sus licencias están en la carpeta «dict».

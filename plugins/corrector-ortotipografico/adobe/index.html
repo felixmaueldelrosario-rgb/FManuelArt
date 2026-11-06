@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Ortotipografía</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <header class="top">
+    <div class="title-row">
+      <strong>Ortotipografía</strong>
+      <span id="origen" class="muted">Local</span>
+    </div>
+    <div class="row">
+      <button id="btn-revisar" class="btn primary">Revisar documento</button>
+      <button id="btn-ajustes" class="btn icon" aria-expanded="false" aria-controls="ajustes" title="Ajustes">⚙</button>
+    </div>
+    <div id="ajustes" class="ajustes" hidden>
+      <label>Idioma
+        <select id="opt-idioma">
+          <option value="">Detectar por bloque</option>
+          <option value="es">Español</option>
+          <option value="en">Inglés</option>
+        </select>
+      </label>
+      <label>Comillas
+        <select id="opt-comillas">
+          <option value="angulares">Angulares « »</option>
+          <option value="inglesas">Inglesas “ ”</option>
+          <option value="libre">No revisar</option>
+        </select>
+      </label>
+      <label class="check"><input type="checkbox" id="opt-semirraya"> Semirraya en rangos (1990–1995)</label>
+      <label class="check"><input type="checkbox" id="opt-suspensivos"> Puntos suspensivos tipográficos (…)</label>
+      <label class="check"><input type="checkbox" id="opt-auto"> Revisar mientras edito</label>
+      <label class="check"><input type="checkbox" id="opt-autoaplicar"> Mostrar «Aceptar las seguras»</label>
+      <button id="btn-diccionario" class="btn">Diccionario del proyecto…</button>
+    </div>
+    <div class="chips" role="group" aria-label="Filtros">
+      <button class="chip" data-f="todas" aria-pressed="true">Todas <span></span></button>
+      <button class="chip" data-f="critico" aria-pressed="false">Críticas <span></span></button>
+      <button class="chip" data-f="seguras" aria-pressed="false">Seguras <span></span></button>
+      <button class="chip" data-f="ortografia" aria-pressed="false">Ortografía <span></span></button>
+      <button class="chip" data-f="tipografia" aria-pressed="false">Tipografía <span></span></button>
+    </div>
+  </header>
+
+  <main id="lista" tabindex="-1" aria-live="polite"></main>
+
+  <section id="panel-historial" class="sheet" hidden>
+    <div class="sheet-head"><strong>Historial</strong><button class="btn icon" data-cerrar="panel-historial" title="Cerrar">✕</button></div>
+    <div id="historial"></div>
+  </section>
+
+  <section id="panel-diccionario" class="sheet" hidden>
+    <div class="sheet-head"><strong>Diccionario del proyecto</strong><button class="btn icon" data-cerrar="panel-diccionario" title="Cerrar">✕</button></div>
+    <p class="muted small">Palabras que el corrector acepta en este documento.</p>
+    <div id="diccionario"></div>
+  </section>
+
+  <footer class="bottom">
+    <div id="resumen" class="muted small"></div>
+    <div id="seguras" class="row" hidden></div>
+    <div class="row">
+      <button id="btn-historial" class="btn">Historial</button>
+      <button id="btn-exportar" class="btn">Exportar informe CSV</button>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -68,7 +68,7 @@
             "nivel": { "enum": ["critico", "medio", "bajo"] },
             "motivos": {
               "type": "array",
-              "items": { "enum": ["componente_maestro", "instancia_con_override", "logo_o_titular", "texto_en_trazado", "cambia_lineas", "desborda_marco", "cambia_ancho", "texto_ui", "cuerpo"] }
+              "items": { "enum": ["estilos_mixtos", "componente_maestro", "instancia_con_override", "logo_o_titular", "texto_en_trazado", "cambia_lineas", "desborda_marco", "cambia_ancho", "texto_ui", "cuerpo"] }
             },
             "instanciasAfectadas": { "type": "integer", "minimum": 0 }
           }
@@ -123,7 +123,7 @@
       "required": ["host", "posicion", "capa"],
       "additionalProperties": false,
       "properties": {
-        "host": { "enum": ["indesign", "illustrator", "photoshop", "figma", "affinity"] },
+        "host": { "enum": ["indesign", "illustrator", "photoshop", "figma", "affinity", "mister-designer"] },
         "posicion": {
           "type": "object",
           "required": ["inicio", "fin"],
