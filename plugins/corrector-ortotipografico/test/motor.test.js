@@ -27,6 +27,17 @@ test('ortografía: falta común y tilde', () => {
   assert.equal(t.confianza.nivel, 'alta');
 });
 
+test('lo que suena igual va primero: baliente → valiente', () => {
+  const r = revisar('Es un hombre onesto, baliente y muy cerio en su trabajo.');
+  assert.deepEqual(r.map((i) => [i.original, i.sugerencias[0], i.confianza.nivel]), [
+    ['onesto', 'honesto', 'alta'],
+    ['baliente', 'valiente', 'alta'],
+    ['cerio', 'serio', 'mediana'],
+  ]);
+  assert.match(r[1].explicacion, /suena igual/);
+  assert.equal(una('Una gran bentana.').sugerencias[0], 'ventana');
+});
+
 test('teclas vecinas', () => {
   const i = una('Mi cqsa es tu casa.');
   assert.equal(i.tipo, 'tecla_adyacente');
@@ -97,6 +108,25 @@ test('fórmula promocional «válido hasta agotar existencias»', () => {
   assert.equal(una('BALIDO HASTA AGOTAR EXISTENCIAS').sugerencias[0], 'VÁLIDO');
   assert.deepEqual(revisar('Oferta válido hasta agotar existencias.'), []);
   assert.deepEqual(revisar('Se oyó un balido en el campo.'), []);
+});
+
+test('palabras que existen pero no encajan: cerio, echo, haber, tubo, halla', () => {
+  const cerio = una('Es un trabajo muy cerio y honesto.');
+  assert.equal(cerio.reglaId, 'CONFUSION_CERIO_SERIO');
+  assert.equal(cerio.sugerencias[0], 'serio');
+  assert.equal(cerio.confianza.nivel, 'mediana');
+  assert.equal(una('Somos CERIOS.').sugerencias[0], 'SERIOS');
+  assert.deepEqual(revisar('El cerio es un elemento químico de las tierras raras.'), []);
+
+  assert.equal(una('Ya lo he echo todo.').sugerencias[0], 'hecho');
+  assert.deepEqual(revisar('Yo echo la carta al buzón.'), []);
+  assert.equal(una('Haber si nos vemos.').sugerencias[0], 'A ver');
+  assert.deepEqual(revisar('Tiene que haber más espacio.'), []);
+  assert.equal(una('Ayer tubo que salir.').sugerencias[0], 'tuvo');
+  assert.deepEqual(revisar('Compra un tubo de pintura.'), []);
+  assert.equal(una('Espero que halla sido fácil.').sugerencias[0], 'haya');
+  assert.deepEqual(revisar('Espero que haya sido fácil.'), []);
+  assert.deepEqual(revisar('Ella halla la respuesta.'), []);
 });
 
 test('detección de idioma por bloque', () => {

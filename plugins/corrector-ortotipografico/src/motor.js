@@ -22,6 +22,39 @@ const FILAS = ['1234567890', 'qwertyuiop', 'asdfghjklñ', 'zxcvbnm'];
 const POS = {};
 FILAS.forEach((fila, f) => [...fila].forEach((c, i) => { POS[c] = [f, i]; }));
 
+// Palabras que existen (el diccionario las acepta) pero que en ese contexto
+// casi siempre son un error de escritura. `grupo` es el índice de la palabra
+// a corregir dentro de la expresión; `salvo` descarta los textos donde la
+// palabra rara sí tiene sentido.
+const CONFUSIONES = [
+  {
+    reglaId: 'CONFUSION_CERIO_SERIO', patron: /\b(cerio|cerios)\b/gi, grupo: 1,
+    salvo: /\b(elementos?|metal(es)?|óxidos?|oxidos?|químic[oa]s?|quimic[oa]s?|tierras\s+raras|lantánidos?|aleaci[oó]n|catalizador)\b/i,
+    sugerir: (p) => p.toLowerCase().endsWith('s') ? 'serios' : 'serio', puntuacion: 0.65,
+    explicacion: '«Cerio» es un elemento químico. Si quieres decir formal, importante o de confianza, se escribe «serio».',
+  },
+  {
+    reglaId: 'CONFUSION_HECHO_ECHO', patron: /\b(he|has|ha|hemos|habéis|han|había|habías|habíamos|habían|haber|habrá|habría|haya|hayan|habiendo)\s+(echo)\b/gi, grupo: 2,
+    sugerir: () => 'hecho', puntuacion: 0.92,
+    explicacion: 'Con «haber» va el participio de «hacer», que se escribe con h: «hecho».',
+  },
+  {
+    reglaId: 'CONFUSION_A_VER', patron: /\b(haber)(?=\s+(si|qué|que|cómo|cuándo|dónde|quién|cuál)\b)/gi, grupo: 1,
+    sugerir: () => 'a ver', puntuacion: 0.85,
+    explicacion: 'Para expresar curiosidad o expectativa se escribe «a ver» (de «ver»), no «haber».',
+  },
+  {
+    reglaId: 'CONFUSION_TUVO_TUBO', patron: /\b(tubo)(?=\s+que\b)/gi, grupo: 1,
+    sugerir: () => 'tuvo', puntuacion: 0.9,
+    explicacion: '«Tuvo» (del verbo tener) se escribe con v. «Tubo» es una pieza hueca.',
+  },
+  {
+    reglaId: 'CONFUSION_HAYA_HALLA', patron: /\b(halla|aya|allá|haya)(?=\s+(sido|estado|hecho|tenido|ido|visto|dicho|llegado|salido|venido|terminado|pasado)\b)/gi, grupo: 1,
+    sugerir: () => 'haya', puntuacion: 0.85,
+    explicacion: 'Delante de un participio va el verbo «haber»: «haya». «Halla» es de «hallar» (encontrar).',
+  },
+];
+
 export const REGLAS_POR_DEFECTO = {
   comillas: 'angulares', // 'angulares' «» · 'inglesas' “” · 'libre' (no revisar)
   rangosConSemirraya: true,
@@ -65,6 +98,16 @@ function distancia(a, b) {
     }
   }
   return d[a.length][b.length];
+}
+
+// Clave de pronunciación en español: dos palabras con la misma clave suenan igual
+// (b/v, s/c/z, h muda, ll/y, g/j ante e/i, c/qu/k ante a/o/u).
+function fonetica(palabra) {
+  return palabra.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/ll/g, 'y').replace(/v/g, 'b').replace(/w/g, 'b')
+    .replace(/qu(?=[ei])/g, 'k').replace(/c(?=[ei])/g, 's').replace(/[cq]/g, 'k')
+    .replace(/g(?=[ei])/g, 'j').replace(/gu(?=[ei])/g, 'g').replace(/z/g, 's').replace(/x/g, 'ks')
+    .replace(/h/g, '');
 }
 
 function igualarMayusculas(modelo, palabra) {
@@ -205,6 +248,21 @@ export function crearCorrector(diccionarios) {
       });
     }
 
+    // --- Palabras que existen pero no encajan en el contexto ---
+    if (lang === 'es') {
+      for (const c of CONFUSIONES) {
+        if (c.salvo && c.salvo.test(texto)) continue;
+        regex(c.patron, (m) => {
+          const palabra = m[c.grupo];
+          const sug = igualarMayusculas(palabra, c.sugerir(palabra));
+          if (sug === palabra) return; // ya está bien (p. ej. «haya sido»)
+          const inicio = m.index + m[0].indexOf(palabra, c.grupo > 1 ? m[1].length : 0);
+          anadir({ tipo: 'ortografia', reglaId: c.reglaId, inicio, fin: inicio + palabra.length, original: palabra,
+            sugerencias: [sug], puntuacion: c.puntuacion, explicacion: c.explicacion });
+        });
+      }
+    }
+
     // --- Frases: apertura de ¿ ¡ y mayúscula inicial ---
     if (lang === 'es') {
       regex(/[^.!?\n]*[?!]/g, (m) => {
@@ -258,7 +316,10 @@ export function crearCorrector(diccionarios) {
         continue;
       }
       const base = todoMayus ? minus : palabra;
-      const sugerencias = [...new Set(sugerir(lang, base).map((s) => igualarMayusculas(palabra, s)))];
+      let sugerencias = [...new Set(sugerir(lang, base).map((s) => igualarMayusculas(palabra, s)))];
+      // En español, lo que suena igual (baliente → valiente) va antes que lo que solo se parece (caliente).
+      const suenaIgual = lang === 'es' ? sugerencias.filter((s) => fonetica(s) === fonetica(palabra)) : [];
+      if (suenaIgual.length) sugerencias = [...suenaIgual, ...sugerencias.filter((s) => !suenaIgual.includes(s))];
       if (!sugerencias.length) {
         anadir({ tipo: 'ortografia', reglaId: 'DESCONOCIDA', inicio, fin, original: palabra, sugerencias: [], puntuacion: 0.35, explicacion: EXPLICACION.ortografia(palabra) });
         continue;
@@ -268,9 +329,12 @@ export function crearCorrector(diccionarios) {
       const soloTilde = primera.normalize('NFD').replace(/[̀-ͯ]/g, '') === palabra.normalize('NFD').replace(/[̀-ͯ]/g, '');
       let p = sugerencias.length === 1 ? 0.92 : dist === 1 ? 0.78 : 0.6;
       if (soloTilde) p = Math.max(p, sugerencias.length <= 2 ? 0.9 : 0.75);
+      const fonetico = suenaIgual.length === 1 && !soloTilde;
+      if (fonetico) p = Math.max(p, 0.88);
       if (todoMayus) p -= 0.1;
-      const tipo = esTeclaAdyacente(palabra, primera) ? 'tecla_adyacente' : 'ortografia';
+      const tipo = !fonetico && esTeclaAdyacente(palabra, primera) ? 'tecla_adyacente' : 'ortografia';
       let explicacion = tipo === 'tecla_adyacente' ? EXPLICACION.tecla_adyacente(palabra, primera) : EXPLICACION.ortografia(palabra, primera);
+      if (fonetico) explicacion = `«${palabra}» suena igual que «${primera}», pero se escribe así: «${primera}».`;
       if (todoMayus && soloTilde) explicacion = `Las mayúsculas también llevan tilde: «${primera}».`;
       anadir({ tipo, reglaId: tipo === 'tecla_adyacente' ? 'TECLA_VECINA' : 'ORTOGRAFIA', inicio, fin, original: palabra, sugerencias, puntuacion: Math.round(p * 100) / 100, explicacion });
     }

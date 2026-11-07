@@ -1,6 +1,6 @@
 {
   "name": "corrector-ortotipografico",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "description": "Corrector ortográfico y tipográfico para programas de diseño (Illustrator, Photoshop, Mister Designer).",
   "type": "module",

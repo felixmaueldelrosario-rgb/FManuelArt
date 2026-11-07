@@ -1,5 +1,13 @@
 ORTOTIPOGRAFÍA · Corrector para Illustrator y Photoshop
-Versión 0.1.2 (prueba)
+Versión 0.1.3 (prueba)
+
+NOVEDADES EN 0.1.3
+  - Detecta palabras que existen pero no encajan en la frase:
+      «muy cerio» → «serio» (salvo si el texto habla de química),
+      «he echo» → «hecho», «haber si» → «a ver si»,
+      «tubo que» → «tuvo que», «halla sido» → «haya sido».
+  - Si una sugerencia suena igual que lo escrito, va primero:
+      «baliente» → «valiente» (antes proponía «caliente»), «bentana» → «ventana».
 
 NOVEDADES EN 0.1.2
   - Sugiere «válido hasta agotar existencias» cuando aparece «balido/valido
