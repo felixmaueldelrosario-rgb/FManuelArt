@@ -11,7 +11,7 @@ Implementación del diseño de [`docs/plugin-ortotipografico`](../../docs/plugin
 
 ## Instalar (usuarios)
 
-Descarga `descargas/Ortotipografia-Adobe-<versión>.zip`, descomprímelo y sigue `LEEME.txt`:
+Descarga `descargas/Ortotipografia-Adobe-<versión>.zip` (ahora 0.1.2), descomprímelo y sigue `LEEME.txt`:
 doble clic en `instalar-mac.command` o `instalar-windows.bat`, reinicia el programa y abre
 **Ventana › Extensiones › Ortotipografía**.
 
@@ -41,10 +41,9 @@ Tras cambiar el motor o el panel, vuelve a generar el `.zip` y cópialo a `desca
 
 ## Estado
 
-Versión 0.1.0. El motor y el panel están probados con pruebas automáticas y en un navegador
-(modo de prueba). El puente con Illustrator y Photoshop (`adobe/jsx/host.jsx`) está escrito
-según el modelo de objetos de cada programa, pero **aún no se ha probado dentro de Illustrator
-ni de Photoshop**: es lo primero que hay que verificar.
+Versión 0.1.2. El motor y el panel tienen pruebas automáticas y se prueban en un navegador
+(modo de prueba). La 0.1.2 se probó **dentro de Illustrator** en Windows y funciona.
+**Photoshop aún no se ha probado** dentro del programa.
 
 Pendiente respecto al diseño: InDesign y Figma, revisión en la nube, informe PDF,
 aprendizaje adaptativo y reglas de equipo compartidas.

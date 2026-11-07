@@ -186,6 +186,25 @@ export function crearCorrector(diccionarios) {
       });
     }
 
+    // --- Fórmulas promocionales: «válido hasta agotar existencias» ---
+    // «balido» y «valido» existen, así que el diccionario no los marca: hace falta el contexto.
+    if (lang === 'es') {
+      regex(new RegExp(`\\b(balido|valido|válido)(\\s+hasta\\s+agotar\\s+)(existencias?)(?![${LETRA}])`, 'gi'), (m) => {
+        const [, palabra, medio, existencias] = m;
+        if (palabra.toLowerCase() !== 'válido') {
+          anadir({ tipo: 'ortografia', reglaId: 'PROMOCION_VALIDO_HASTA_AGOTAR', inicio: m.index, fin: m.index + palabra.length, original: palabra,
+            sugerencias: [igualarMayusculas(palabra, 'válido')], puntuacion: 0.8,
+            explicacion: 'En esta fórmula promocional, «válido» expresa que la oferta está vigente y lleva tilde. Revisa la frase antes de aceptar.' });
+        }
+        if (existencias.toLowerCase() === 'existencia') {
+          const inicio = m.index + palabra.length + medio.length;
+          anadir({ tipo: 'ortografia', reglaId: 'PROMOCION_AGOTAR_EXISTENCIAS', inicio, fin: inicio + existencias.length, original: existencias,
+            sugerencias: [igualarMayusculas(existencias, 'existencias')], puntuacion: 0.7,
+            explicacion: 'Si te refieres a las unidades disponibles de un producto, la fórmula habitual es «hasta agotar existencias». Confirma que ese sea el sentido.' });
+        }
+      });
+    }
+
     // --- Frases: apertura de ¿ ¡ y mayúscula inicial ---
     if (lang === 'es') {
       regex(/[^.!?\n]*[?!]/g, (m) => {

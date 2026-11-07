@@ -3,6 +3,7 @@
 // prueba con un documento de ejemplo.
 
 import { crearCorrector, clasificarImpacto, esAutoAplicable } from './motor.js';
+import { version } from '../package.json';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -57,6 +58,12 @@ function crearHostPrueba() {
 
 const host = modoPrueba ? crearHostPrueba() : hostAdobe;
 
+// Programa en el que está abierto el panel, según CEP: ILST, PHSP o PHXS.
+function appIdPanel() {
+  try { return JSON.parse(cep.getHostEnvironment()).appId; } catch { return null; }
+}
+const NOMBRE_APP = { ILST: 'Illustrator', PHSP: 'Photoshop', PHXS: 'Photoshop' };
+
 /* ---------- Diccionarios ---------- */
 async function leerArchivo(ruta) {
   try {
@@ -86,6 +93,7 @@ const estado = {
   decisiones: [],
   ajustes: { ...AJUSTES_DEF, ...guardado.leer('ot:ajustes', {}) },
   ocupado: false,
+  errorLectura: null,
   confirmarSeguras: false,
 };
 const claveDoc = () => (estado.doc?.nombre || 'sin-documento');
@@ -125,6 +133,14 @@ async function revisarDocumento({ silencioso = false } = {}) {
   if (!silencioso) $('#btn-revisar').textContent = 'Revisando…';
   try {
     const doc = await host.documento();
+    if (doc.ok === false) throw new Error(doc.error);
+    if (!modoPrueba) {
+      // El puente ExtendScript debe responder como el mismo programa que aloja el panel.
+      const appId = appIdPanel();
+      const esperado = appId === 'ILST' ? 'illustrator' : /^(PHSP|PHXS)$/.test(appId) ? 'photoshop' : null;
+      if (esperado && doc.app !== esperado) throw new Error(`El panel está en ${NOMBRE_APP[appId]} pero el puente responde como ${doc.app}.`);
+    }
+    estado.errorLectura = null;
     if (!doc.abierto) {
       estado.doc = null; estado.bloques.clear();
       return render();
@@ -148,7 +164,9 @@ async function revisarDocumento({ silencioso = false } = {}) {
     if (cambios) estado.ultimaRevision = { ms: Math.round(performance.now() - t0), bloques: r.bloques.length, cambios };
     if (cambios || !silencioso) render();
   } catch (e) {
-    if (!silencioso) avisar('No pudimos leer el documento. ' + e.message);
+    estado.errorLectura = e.message;
+    estado.bloques.clear();
+    render();
   } finally {
     estado.ocupado = false;
     $('#btn-revisar').textContent = 'Revisar documento';
@@ -389,10 +407,11 @@ function render() {
     chip.setAttribute('aria-pressed', String(chip.dataset.f === estado.filtro));
     chip.querySelector('span').textContent = inc.filter((i) => pasaFiltro(i, chip.dataset.f)).length;
   }
-  $('#origen').textContent = modoPrueba ? 'Modo de prueba' : `Local · ${estado.doc?.app === 'photoshop' ? 'Photoshop' : 'Illustrator'}`;
+  $('#origen').textContent = modoPrueba ? `Modo de prueba · ${version}` : `Local · ${NOMBRE_APP[appIdPanel()] || 'Adobe'} · ${version}`;
 
   let html = '';
   if (!estado.corrector) html = '<div class="vacio"><strong>Cargando diccionarios…</strong></div>';
+  else if (estado.errorLectura) html = `<div class="vacio"><strong>No pudimos leer el documento.</strong><span>${esc(estado.errorLectura)}</span></div>`;
   else if (!estado.doc) html = '<div class="vacio"><strong>Abre un documento para revisarlo.</strong></div>';
   else if (!estado.bloques.size) html = '<div class="vacio"><strong>Este documento no tiene texto editable.</strong><span>El texto convertido en contornos no se puede revisar.</span></div>';
   else if (!inc.length) html = '<div class="vacio"><strong>Todo en orden.</strong><span>No hay incidencias pendientes.</span></div>';

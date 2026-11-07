@@ -33,8 +33,11 @@ function ot_json(v) {
 }
 
 function ot_app() {
-  var n = BridgeTalk.appName;
-  return n === 'illustrator' ? 'illustrator' : n === 'photoshop' ? 'photoshop' : n;
+  // Se usa el DOM del programa, no la identidad de mensajería de BridgeTalk.
+  var nombre = String(app.name).toLowerCase();
+  if (nombre.indexOf('illustrator') !== -1) return 'illustrator';
+  if (nombre.indexOf('photoshop') !== -1) return 'photoshop';
+  throw new Error('Aplicacion no reconocida: ' + app.name);
 }
 
 function ot_error(e) { return ot_json({ ok: false, error: String(e) }); }

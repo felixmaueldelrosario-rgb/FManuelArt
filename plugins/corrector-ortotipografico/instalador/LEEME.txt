@@ -1,7 +1,17 @@
 ORTOTIPOGRAFÍA · Corrector para Illustrator y Photoshop
-Versión 0.1.0 (prueba)
+Versión 0.1.2 (prueba)
+
+NOVEDADES EN 0.1.2
+  - Sugiere «válido hasta agotar existencias» cuando aparece «balido/valido
+    hasta agotar existencia(s)». Es de confianza media: revísala antes de aceptar.
+  - Reconoce Illustrator y Photoshop por el propio programa y muestra en el
+    panel el programa y la versión (por ejemplo «Local · Illustrator · 0.1.2»).
+  - Si no puede leer el documento, el panel explica el motivo.
+  - El instalador de Windows avisa si no pudo copiar los archivos.
 
 INSTALAR
+  Cierra Illustrator y Photoshop antes de instalar.
+
   Mac:
     1. Haz doble clic en «instalar-mac.command».
        Si macOS dice que no puede abrirlo: clic derecho > Abrir > Abrir.

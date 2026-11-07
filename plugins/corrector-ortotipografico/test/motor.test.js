@@ -88,6 +88,17 @@ test('comillas, puntos suspensivos y rangos', () => {
   assert.equal(una('Abierto de 1990-1995 sin pausa.').sugerencias[0], '–');
 });
 
+test('fórmula promocional «válido hasta agotar existencias»', () => {
+  const r = revisar('Oferta valido hasta agotar existencia.');
+  assert.deepEqual(r.map((i) => [i.reglaId, i.sugerencias[0], i.confianza.nivel]), [
+    ['PROMOCION_VALIDO_HASTA_AGOTAR', 'válido', 'mediana'],
+    ['PROMOCION_AGOTAR_EXISTENCIAS', 'existencias', 'mediana'],
+  ]);
+  assert.equal(una('BALIDO HASTA AGOTAR EXISTENCIAS').sugerencias[0], 'VÁLIDO');
+  assert.deepEqual(revisar('Oferta válido hasta agotar existencias.'), []);
+  assert.deepEqual(revisar('Se oyó un balido en el campo.'), []);
+});
+
 test('detección de idioma por bloque', () => {
   assert.equal(detectarIdioma('The new collection is now available').codigo, 'en');
   assert.equal(detectarIdioma('La nueva colección ya está disponible').codigo, 'es');
