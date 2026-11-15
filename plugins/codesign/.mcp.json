@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "codesign": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@imgly/codesign-mcp@0.4.1",
+        "stdio"
+      ]
+    }
+  }
+}
