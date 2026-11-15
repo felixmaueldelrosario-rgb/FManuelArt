@@ -7,6 +7,12 @@
       "skillPath": "skills/disciplines/ai-behavior-trees-utility-ai/SKILL.md",
       "computedHash": "cf907aa8e339ca034ebd30a868148f7fa678dd3058f17636002772835612724a"
     },
+    "anti-slop": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/visual-taste/anti-slop/SKILL.md",
+      "computedHash": "922eccaf5737e5343cfbabc6dbacb12f6c89f55ed87739c880ccd431b951678e"
+    },
     "audio-design": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
@@ -31,11 +37,23 @@
       "skillPath": "skills/genres/card-game/SKILL.md",
       "computedHash": "9de67b390fb28839eb24c92aed311836e9ec45c0cd07df45f1fe9568b5429421"
     },
+    "colour-palette": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/visual-taste/colour-palette/SKILL.md",
+      "computedHash": "2348ee91807d6c2ba5629d646c8fb23279facb9e38491d4f996024719ab5b497"
+    },
     "create-game-assets": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
       "skillPath": "skills/disciplines/create-game-assets/SKILL.md",
       "computedHash": "9fa157004c040ab3de38ac8cc3a7a49238821fcde7e384e0b94b10657c6e6a53"
+    },
+    "defaults": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/interaction/defaults/SKILL.md",
+      "computedHash": "927d4fb076957929ce845a687e952bd45b7259b2455b92a6ed463de2b311a3fe"
     },
     "defold-core": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
@@ -54,6 +72,24 @@
       "sourceType": "github",
       "skillPath": "skills/ebitengine/ebitengine-game/SKILL.md",
       "computedHash": "2a58eae214ce02a7ccec816b64fea35e10c75b818d678b45ca485591b4e1a117"
+    },
+    "empty-states": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/feedback/empty-states/SKILL.md",
+      "computedHash": "21abbd19ff6e153e2adc5e77c4827a3c2a81cb270a91e637c54ade1c06a712c2"
+    },
+    "errors": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/voice/errors/SKILL.md",
+      "computedHash": "ee4b47d1262337488c574bfe98e900977eb99b39929a680e3c6f480b1186ba06"
+    },
+    "forms": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/interaction/forms/SKILL.md",
+      "computedHash": "575768c3ec21d6c00f56ef60b6bde69f7e09de63b40b7b86d1b6b8b26462310e"
     },
     "fps-shooter": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
@@ -193,6 +229,12 @@
       "skillPath": "skills/godot/godot-ui-control/SKILL.md",
       "computedHash": "7bc39fe9a56fc1daa68fb2c343766b79f08d96e33301e8669439451c711146da"
     },
+    "icon-buttons": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/interaction/icon-buttons/SKILL.md",
+      "computedHash": "2c91a77393bc60e6d930f17993200701e8b09723dac6fa6240d677c1dfb3a0f0"
+    },
     "input-systems": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
@@ -205,17 +247,47 @@
       "skillPath": "skills/workflows/itch-publish/SKILL.md",
       "computedHash": "0c16d4088649214584a37b73c78a03f99cf4d68744beee86923fea6f6a1239a8"
     },
+    "keyboard": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/interaction/keyboard/SKILL.md",
+      "computedHash": "d63d4933ea0ca9dbf0062f49d509757e7b080bbb45e2b77680771c166b8e4ae8"
+    },
+    "labels": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/voice/labels/SKILL.md",
+      "computedHash": "46f8bd5a77775fe4b9f6c3543cbdf8af17531178f4774d9e04eac415ceb32fe8"
+    },
     "level-design": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
       "skillPath": "skills/disciplines/level-design/SKILL.md",
       "computedHash": "f150b2062dff70863a6efcbf51e2b574acee303aac7f7676e384980db5947b82"
     },
+    "loaders": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/feedback/loaders/SKILL.md",
+      "computedHash": "55ee6e776aac0a4935a739be58d153192a2ef3a8387479b650307457a6cdf7b1"
+    },
     "love2d-core": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
       "skillPath": "skills/other-engines/love2d-core/SKILL.md",
       "computedHash": "eff3257a63b400cfe82db3e147b1366628b0d09c9c806838648e7275647f8541"
+    },
+    "motion": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/animation/motion/SKILL.md",
+      "computedHash": "5f77c7a2c3b9433b76fee2752e795031fc933771f20c4335ca60ba768e33a6e5"
+    },
+    "page-patterns": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/interaction/page-patterns/SKILL.md",
+      "computedHash": "8339d1fd086c6316a481bbf5f0ba18034238732bf45a13f643bbcbcb267fe364"
     },
     "performance-optimization": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
@@ -276,6 +348,12 @@
       "sourceType": "github",
       "skillPath": "skills/other-engines/pygame-core/SKILL.md",
       "computedHash": "79515d86e1f5e9047c6492f3b18ffac0982935813cd71c4830114d42f849c25e"
+    },
+    "reduced-motion": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/animation/reduced-motion/SKILL.md",
+      "computedHash": "e6708c0b576862a560e7e230f66b4b79a2a5fa403816f555115d3e7d90f671bf"
     },
     "roblox-characters": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
@@ -349,17 +427,35 @@
       "skillPath": "skills/disciplines/save-systems/SKILL.md",
       "computedHash": "5248469a72bb24bc02e137d59b92ae1286be94ccc76a0ef5560140545517f875"
     },
+    "setup-ui-ux-skills": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/setup/setup-ui-ux-skills/SKILL.md",
+      "computedHash": "6be29a77dc2b3d915a9db0d839ece1c09c7d840aaf16d6a11ac87a59c47ff41f"
+    },
     "shader-programming": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
       "skillPath": "skills/disciplines/shader-programming/SKILL.md",
       "computedHash": "f5722dbca5e9fa6a8954f79e7735ff244c22702f59b0b7c3f9f6bdd5beabba18"
     },
+    "spacing": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/visual-taste/spacing/SKILL.md",
+      "computedHash": "87788ba111c8d7ebdca2aa6badab05e303d95a30d75286da5466b4b3a9d14274"
+    },
     "steam-publish": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
       "skillPath": "skills/workflows/steam-publish/SKILL.md",
       "computedHash": "d274d04aef6fabd96e14c1516a5d2ba363b8531817c9366c9ae7c9183b4091e3"
+    },
+    "surfaces": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/interaction/surfaces/SKILL.md",
+      "computedHash": "98fece4db4286aa55cf4b36258443d51f2e8f9eaf2b7598b42b7c689443e6a3a"
     },
     "survival-crafting": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
@@ -390,6 +486,18 @@
       "sourceType": "github",
       "skillPath": "skills/genres/tower-defense/SKILL.md",
       "computedHash": "9003b6f88691bebe25d43e0b915adc6b96e30d0b924c6d0afe154f6bf79d0144"
+    },
+    "transitions": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/animation/transitions/SKILL.md",
+      "computedHash": "b90664b6c6b812e608946fb348abe45a4c5f0d59bcc43124591475a76daa5946"
+    },
+    "typography": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/visual-taste/typography/SKILL.md",
+      "computedHash": "be92055d640d8f13823ad878efb8c7bcf0e622bacf2f6894bb80e0aec1510d92"
     },
     "unity-animation": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
@@ -480,6 +588,24 @@
       "sourceType": "github",
       "skillPath": "skills/unreal/unreal-packaging/SKILL.md",
       "computedHash": "76980d515f63d14312d1775f312ee6fc6b73373400194f963088c430e2d1db77"
+    },
+    "ux-audit": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/audit/ux-audit/SKILL.md",
+      "computedHash": "9e5afaa51b86b09480bf3dcb06d7501af9f8f38b0d83cf0451b67f5203379bbb"
+    },
+    "verbs": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/voice/verbs/SKILL.md",
+      "computedHash": "dfd3c9a82138964dab5937ef68dd17aa653899830b36557d09cc492107abf983"
+    },
+    "viewports": {
+      "source": "VectorLabAU/skills",
+      "sourceType": "github",
+      "skillPath": "skills/visual-taste/viewports/SKILL.md",
+      "computedHash": "328b0078eb0efc669b83eba7fdad980b46c8196bcc7cd05ea3a6470430e33e7e"
     },
     "visual-novel": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",

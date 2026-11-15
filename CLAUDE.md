@@ -24,5 +24,11 @@ La plataforma de Mundo Taíno tiene que ser atractiva y con identidad propia, nu
   - `pixijs-rendering` o `threejs-*`: render web con animación avanzada.
   - `create-game-assets`: arte coherente con la serie.
   - `audio-design`: sonido de cartas y música.
+  - Skills de VectorLab (`VectorLabAU/skills`):
+    - `anti-slop`: evitar el aspecto genérico.
+    - `motion`, `transitions` y `reduced-motion`: animación de interfaz.
+    - `colour-palette`, `typography`, `spacing` y `surfaces`: lenguaje visual.
+    - `ux-audit`: revisar la experiencia de usuario.
+    - `keyboard`, `viewports`, `loaders`, `empty-states` y `errors`: detalles de uso.
 
 Esto no se trabaja todavía. Es una regla para cuando se trabaje en el juego.
