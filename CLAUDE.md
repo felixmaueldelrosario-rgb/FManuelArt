@@ -30,5 +30,6 @@ La plataforma de Mundo Taíno tiene que ser atractiva y con identidad propia, nu
     - `colour-palette`, `typography`, `spacing` y `surfaces`: lenguaje visual.
     - `ux-audit`: revisar la experiencia de usuario.
     - `keyboard`, `viewports`, `loaders`, `empty-states` y `errors`: detalles de uso.
+    - Estas skills están pensadas para aplicaciones de trabajo y piden interfaces sobrias. En Mundo Taíno se usan para la usabilidad, la accesibilidad y la calidad del movimiento, pero no para recortar la identidad visual: los marcos ornamentales, los dorados y los motivos taínos se mantienen.
 
 Esto no se trabaja todavía. Es una regla para cuando se trabaje en el juego.
