@@ -1,0 +1,11 @@
+{
+  "name": "fmanuel-art",
+  "owner": { "name": "FManuel Art" },
+  "plugins": [
+    {
+      "name": "codesign",
+      "source": "./plugins/codesign",
+      "description": "CoDesign (IMG.LY) 0.4.1: editable designs, animation and video export."
+    }
+  ]
+}
